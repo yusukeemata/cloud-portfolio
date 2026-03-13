@@ -1,0 +1,291 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Serverless CRUD API backend for Cloud Portfolio
+
+Resources:
+  PortfolioItemsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: PortfolioItemsCFN
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: itemId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: itemId
+          KeyType: HASH
+
+  PortfolioApiRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: PortfolioApiRoleCFN
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: PortfolioApiPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:PutItem
+                  - dynamodb:GetItem
+                  - dynamodb:Scan
+                  - dynamodb:DeleteItem
+                Resource: !GetAtt PortfolioItemsTable.Arn
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "*"
+
+  PortfolioApiFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: PortfolioApiFunctionCFN
+      Runtime: python3.12
+      Handler: index.lambda_handler
+      Role: !GetAtt PortfolioApiRole.Arn
+      Timeout: 10
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref PortfolioItemsTable
+      Code:
+        ZipFile: |
+          import json
+          import os
+          import boto3
+          import uuid
+          from datetime import datetime, timezone
+          from decimal import Decimal
+
+          dynamodb = boto3.resource("dynamodb")
+          table_name = os.environ.get("TABLE_NAME")
+          table = dynamodb.Table(table_name)
+
+          def decimal_default(obj):
+              if isinstance(obj, Decimal):
+                  return float(obj)
+              raise TypeError
+
+          def lambda_handler(event, context):
+              method = event["requestContext"]["http"]["method"]
+              path = event["rawPath"]
+
+              if method == "POST" and path == "/items":
+                  body = json.loads(event["body"])
+                  item_id = str(uuid.uuid4())
+                  now = datetime.now(timezone.utc).isoformat()
+
+                  item = {
+                      "itemId": item_id,
+                      "title": body["title"],
+                      "description": body["description"],
+                      "category": body["category"],
+                      "status": body["status"],
+                      "tags": body.get("tags", []),
+                      "createdAt": now,
+                      "updatedAt": now,
+                      "published": body["published"]
+                  }
+
+                  table.put_item(Item=item)
+
+                  return {
+                      "statusCode": 200,
+                      "headers": {"Content-Type": "application/json"},
+                      "body": json.dumps({
+                          "message": "Item created",
+                          "item": item
+                      })
+                  }
+
+              elif method == "GET" and path == "/items":
+                  response = table.scan()
+                  items = response.get("Items", [])
+
+                  return {
+                      "statusCode": 200,
+                      "headers": {"Content-Type": "application/json"},
+                      "body": json.dumps({"items": items}, default=decimal_default)
+                  }
+
+              elif method == "GET" and path.startswith("/items/"):
+                  item_id = event["pathParameters"]["id"]
+                  response = table.get_item(Key={"itemId": item_id})
+                  item = response.get("Item")
+
+                  if not item:
+                      return {
+                          "statusCode": 404,
+                          "headers": {"Content-Type": "application/json"},
+                          "body": json.dumps({"message": "Item not found"})
+                      }
+
+                  return {
+                      "statusCode": 200,
+                      "headers": {"Content-Type": "application/json"},
+                      "body": json.dumps({"item": item}, default=decimal_default)
+                  }
+
+              elif method == "PUT" and path.startswith("/items/"):
+                  item_id = event["pathParameters"]["id"]
+                  body = json.loads(event["body"])
+
+                  existing_response = table.get_item(Key={"itemId": item_id})
+                  existing_item = existing_response.get("Item")
+
+                  if not existing_item:
+                      return {
+                          "statusCode": 404,
+                          "headers": {"Content-Type": "application/json"},
+                          "body": json.dumps({"message": "Item not found"})
+                      }
+
+                  updated_item = {
+                      "itemId": item_id,
+                      "title": body["title"],
+                      "description": body["description"],
+                      "category": body["category"],
+                      "status": body["status"],
+                      "tags": body.get("tags", []),
+                      "createdAt": existing_item["createdAt"],
+                      "updatedAt": datetime.now(timezone.utc).isoformat(),
+                      "published": body["published"]
+                  }
+
+                  table.put_item(Item=updated_item)
+
+                  return {
+                      "statusCode": 200,
+                      "headers": {"Content-Type": "application/json"},
+                      "body": json.dumps({
+                          "message": "Item updated",
+                          "item": updated_item
+                      })
+                  }
+
+              elif method == "DELETE" and path.startswith("/items/"):
+                  item_id = event["pathParameters"]["id"]
+
+                  existing_response = table.get_item(Key={"itemId": item_id})
+                  existing_item = existing_response.get("Item")
+
+                  if not existing_item:
+                      return {
+                          "statusCode": 404,
+                          "headers": {"Content-Type": "application/json"},
+                          "body": json.dumps({"message": "Item not found"})
+                      }
+
+                  table.delete_item(Key={"itemId": item_id})
+
+                  return {
+                      "statusCode": 200,
+                      "headers": {"Content-Type": "application/json"},
+                      "body": json.dumps({
+                          "message": "Item deleted",
+                          "itemId": item_id
+                      })
+                  }
+
+              return {
+                  "statusCode": 405,
+                  "headers": {"Content-Type": "application/json"},
+                  "body": json.dumps({"message": f"Method {method} not allowed for path {path}"})
+              }
+
+  PortfolioHttpApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: PortfolioHttpApiCFN
+      ProtocolType: HTTP
+      CorsConfiguration:
+        AllowOrigins:
+          - "*"
+        AllowMethods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+        AllowHeaders:
+          - content-type
+
+  ApiStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref PortfolioHttpApi
+      StageName: '$default'
+      AutoDeploy: true
+
+  LambdaIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref PortfolioHttpApi
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt PortfolioApiFunction.Arn
+      PayloadFormatVersion: '2.0'
+
+  RoutePostItems:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref PortfolioHttpApi
+      RouteKey: 'POST /items'
+      Target: !Sub 'integrations/${LambdaIntegration}'
+
+  RouteGetItems:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref PortfolioHttpApi
+      RouteKey: 'GET /items'
+      Target: !Sub 'integrations/${LambdaIntegration}'
+
+  RouteGetItemById:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref PortfolioHttpApi
+      RouteKey: 'GET /items/{id}'
+      Target: !Sub 'integrations/${LambdaIntegration}'
+
+  RoutePutItemById:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref PortfolioHttpApi
+      RouteKey: 'PUT /items/{id}'
+      Target: !Sub 'integrations/${LambdaIntegration}'
+
+  RouteDeleteItemById:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref PortfolioHttpApi
+      RouteKey: 'DELETE /items/{id}'
+      Target: !Sub 'integrations/${LambdaIntegration}'
+
+  LambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref PortfolioApiFunction
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PortfolioHttpApi}/*/*'
+
+Outputs:
+  ApiUrl:
+    Description: HTTP API endpoint
+    Value: !Sub 'https://${PortfolioHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
+
+  TableName:
+    Description: DynamoDB table name
+    Value: !Ref PortfolioItemsTable
+
+  LambdaName:
+    Description: Lambda function name
+    Value: !Ref PortfolioApiFunction
