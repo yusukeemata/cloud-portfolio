@@ -14,6 +14,23 @@ The application uses a static frontend and a serverless backend.
 
 ## Architecture
 
+User (Browser)
+      │
+      ▼
+CloudFront
+      │
+      ▼
+S3 (Static Website)
+      │
+      ▼
+API Gateway
+      │
+      ▼
+Lambda
+      │
+      ▼
+DynamoDB
+
 AWS services used in this project:
 
 - Amazon S3
