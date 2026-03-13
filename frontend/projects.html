@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Portfolio</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #dbe3ee;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --badge-draft-bg: #fef3c7;
+      --badge-draft-text: #92400e;
+      --badge-published-bg: #dcfce7;
+      --badge-published-text: #166534;
+      --badge-archived-bg: #e5e7eb;
+      --badge-archived-text: #374151;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: white;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 40px;
+    }
+
+    .hero p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 760px;
+    }
+
+    .hero-meta {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 24px 0 28px;
+    }
+
+    .stat-card,
+    .panel,
+    .item-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card {
+      padding: 18px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .panel {
+      padding: 20px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      width: 280px;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 15px;
+      background: white;
+    }
+
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .item-card {
+      padding: 18px;
+    }
+
+    .item-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .item-card p {
+      margin: 0 0 10px;
+    }
+
+    .item-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .status-draft {
+      background: var(--badge-draft-bg);
+      color: var(--badge-draft-text);
+    }
+
+    .status-published {
+      background: var(--badge-published-bg);
+      color: var(--badge-published-text);
+    }
+
+    .status-archived {
+      background: var(--badge-archived-bg);
+      color: var(--badge-archived-text);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 16px;
+    }
+
+    .tag {
+      background: #dbeafe;
+      color: #1d4ed8;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .empty-state {
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+      padding: 26px;
+      text-align: center;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .loading {
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1>Cloud Portfolio</h1>
+      <p>
+        A serverless portfolio app built with S3, CloudFront, API Gateway, Lambda, and DynamoDB.
+        This public page shows portfolio items stored in DynamoDB through a custom API domain.
+      </p>
+      <div class="hero-meta">
+        <span class="hero-chip">Frontend: S3 + CloudFront</span>
+        <span class="hero-chip">Backend: API Gateway + Lambda</span>
+        <span class="hero-chip">Database: DynamoDB</span>
+        <span class="hero-chip">API Domain: api.yusuke-cloud.org</span>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stat-card">
+        <div class="stat-label">Total Items</div>
+        <div id="totalItems" class="stat-value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Published Items</div>
+        <div id="publishedItems" class="stat-value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Draft Items</div>
+        <div id="draftItems" class="stat-value">0</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="toolbar">
+        <div>
+          <h2 style="margin:0;">Portfolio Items</h2>
+          <div class="item-meta" style="margin-top:6px;">Live data loaded from API Gateway, Lambda, and DynamoDB.</div>
+        </div>
+        <input id="searchInput" class="search-box" type="text" placeholder="Search by title or category" />
+      </div>
+
+      <div id="loading" class="loading">Loading items...</div>
+      <div id="itemsContainer" class="item-grid"></div>
+    </section>
+  </div>
+
+  <script>
+    const API_BASE_URL = "https://api.yusuke-cloud.org";
+
+    const itemsContainer = document.getElementById("itemsContainer");
+    const loadingDiv = document.getElementById("loading");
+    const searchInput = document.getElementById("searchInput");
+    const totalItemsEl = document.getElementById("totalItems");
+    const publishedItemsEl = document.getElementById("publishedItems");
+    const draftItemsEl = document.getElementById("draftItems");
+
+    let allItems = [];
+
+    function updateStats(items) {
+      totalItemsEl.textContent = items.length;
+      publishedItemsEl.textContent = items.filter(item => item.published === true).length;
+      draftItemsEl.textContent = items.filter(item => item.status === "draft").length;
+    }
+
+    function formatDate(value) {
+      if (!value) return "-";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      return date.toLocaleString();
+    }
+
+    function getStatusClass(status) {
+      if (status === "published") return "status-published";
+      if (status === "archived") return "status-archived";
+      return "status-draft";
+    }
+
+    function renderItems(items) {
+      itemsContainer.innerHTML = "";
+
+      if (!items || items.length === 0) {
+        itemsContainer.innerHTML = '<div class="empty-state">No matching items found.</div>';
+        return;
+      }
+
+      items.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "item-card";
+
+        const tagsHtml = (item.tags || [])
+          .map(tag => `<span class="tag">${tag}</span>`)
+          .join("");
+
+        card.innerHTML = `
+          <h3>${item.title || "Untitled"}</h3>
+          <p>${item.description || "No description"}</p>
+          <div class="status-row">
+            <span class="status-badge ${getStatusClass(item.status)}">${item.status || "-"}</span>
+            <span class="item-meta">Published: ${item.published}</span>
+          </div>
+          <div class="item-meta">Category: ${item.category || "-"}</div>
+          <div class="item-meta">Created: ${formatDate(item.createdAt)}</div>
+          <div class="item-meta">Updated: ${formatDate(item.updatedAt)}</div>
+          <div class="tags">${tagsHtml || "<span class=\"item-meta\">No tags</span>"}</div>
+        `;
+
+        itemsContainer.appendChild(card);
+      });
+    }
+
+    function filterAndRender() {
+      const keyword = searchInput.value.trim().toLowerCase();
+
+      const filtered = allItems.filter(item => {
+        const title = (item.title || "").toLowerCase();
+        const category = (item.category || "").toLowerCase();
+        return title.includes(keyword) || category.includes(keyword);
+      });
+
+      renderItems(filtered);
+      updateStats(allItems);
+    }
+
+    async function loadItems() {
+      loadingDiv.style.display = "block";
+      itemsContainer.innerHTML = "";
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/items`);
+        const data = await response.json();
+
+        allItems = data.items || [];
+        allItems.sort((a, b) => (b.updatedAt || "").localeCompare(a.updatedAt || ""));
+
+        filterAndRender();
+      } catch (error) {
+        console.error("Error loading items:", error);
+        itemsContainer.innerHTML = '<div class="empty-state">Failed to load items.</div>';
+      } finally {
+        loadingDiv.style.display = "none";
+      }
+    }
+
+    searchInput.addEventListener("input", filterAndRender);
+
+    loadItems();
+  </script>
+</body>
+</html>
