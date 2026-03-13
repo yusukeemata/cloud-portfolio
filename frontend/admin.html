@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Portfolio</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #dbe3ee;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --danger: #dc2626;
+      --danger-hover: #b91c1c;
+      --success-bg: #ecfdf5;
+      --success-text: #065f46;
+      --error-bg: #fef2f2;
+      --error-text: #991b1b;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --badge-draft-bg: #fef3c7;
+      --badge-draft-text: #92400e;
+      --badge-published-bg: #dcfce7;
+      --badge-published-text: #166534;
+      --badge-archived-bg: #e5e7eb;
+      --badge-archived-text: #374151;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: white;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 40px;
+    }
+
+    .hero p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 760px;
+    }
+
+    .hero-meta {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 24px 0 28px;
+    }
+
+    .stat-card,
+    .panel,
+    .item-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card {
+      padding: 18px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 20px;
+    }
+
+    .panel h2 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+
+    .panel-subtitle {
+      color: var(--muted);
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      font-size: 15px;
+      background: white;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 11px 16px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .primary-btn {
+      background: var(--primary);
+      color: white;
+    }
+
+    .primary-btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .secondary-btn {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .danger-btn {
+      background: var(--danger);
+      color: white;
+    }
+
+    .danger-btn:hover {
+      background: var(--danger-hover);
+    }
+
+    .message {
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      display: none;
+      font-size: 14px;
+    }
+
+    .message.success {
+      display: block;
+      background: var(--success-bg);
+      color: var(--success-text);
+      border: 1px solid #a7f3d0;
+    }
+
+    .message.error {
+      display: block;
+      background: var(--error-bg);
+      color: var(--error-text);
+      border: 1px solid #fecaca;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      width: 280px;
+      margin-bottom: 0;
+    }
+
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .item-card {
+      padding: 18px;
+    }
+
+    .item-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .item-card p {
+      margin: 0 0 10px;
+    }
+
+    .item-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .status-draft {
+      background: var(--badge-draft-bg);
+      color: var(--badge-draft-text);
+    }
+
+    .status-published {
+      background: var(--badge-published-bg);
+      color: var(--badge-published-text);
+    }
+
+    .status-archived {
+      background: var(--badge-archived-bg);
+      color: var(--badge-archived-text);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 16px;
+    }
+
+    .tag {
+      background: #dbeafe;
+      color: #1d4ed8;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .item-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .empty-state {
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+      padding: 26px;
+      text-align: center;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .loading {
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1>Cloud Portfolio</h1>
+      <p>
+        A serverless portfolio app built with S3, CloudFront, API Gateway, Lambda, and DynamoDB.
+        This page can create, read, update, and delete items through a custom API domain.
+      </p>
+      <div class="hero-meta">
+        <span class="hero-chip">Frontend: S3 + CloudFront</span>
+        <span class="hero-chip">Backend: API Gateway + Lambda</span>
+        <span class="hero-chip">Database: DynamoDB</span>
+        <span class="hero-chip">API Domain: api.yusuke-cloud.org</span>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stat-card">
+        <div class="stat-label">Total Items</div>
+        <div id="totalItems" class="stat-value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Published Items</div>
+        <div id="publishedItems" class="stat-value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Draft Items</div>
+        <div id="draftItems" class="stat-value">0</div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <div class="panel">
+        <h2 id="formTitle">Create New Item</h2>
+        <p class="panel-subtitle">Use this form to add a new project, note, or lab to your cloud portfolio.</p>
+
+        <div id="message" class="message"></div>
+
+        <form id="itemForm">
+          <label for="title">Title</label>
+          <input type="text" id="title" required />
+
+          <label for="description">Description</label>
+          <textarea id="description" required></textarea>
+
+          <label for="category">Category</label>
+          <select id="category">
+            <option value="project">project</option>
+            <option value="note">note</option>
+            <option value="lab">lab</option>
+          </select>
+
+          <label for="status">Status</label>
+          <select id="status">
+            <option value="draft">draft</option>
+            <option value="published">published</option>
+            <option value="archived">archived</option>
+          </select>
+
+          <label for="published">Published</label>
+          <select id="published">
+            <option value="false">false</option>
+            <option value="true">true</option>
+          </select>
+
+          <label for="tags">Tags (comma separated)</label>
+          <input type="text" id="tags" placeholder="lambda,dynamodb,apigateway" />
+
+          <div class="button-row">
+            <button type="submit" class="primary-btn" id="submitButton">Create Item</button>
+            <button type="button" class="secondary-btn" id="cancelEditButton" style="display:none;">Cancel Edit</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="toolbar">
+          <div>
+            <h2 style="margin:0;">Existing Items</h2>
+            <div class="panel-subtitle" style="margin:6px 0 0;">Live data from DynamoDB through API Gateway and Lambda.</div>
+          </div>
+          <input id="searchInput" class="search-box" type="text" placeholder="Search by title or category" />
+        </div>
+
+        <div id="loading" class="loading">Loading items...</div>
+        <div id="itemsContainer" class="item-grid"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const API_BASE_URL = "https://api.yusuke-cloud.org";
+
+    const form = document.getElementById("itemForm");
+    const formTitle = document.getElementById("formTitle");
+    const submitButton = document.getElementById("submitButton");
+    const cancelEditButton = document.getElementById("cancelEditButton");
+    const itemsContainer = document.getElementById("itemsContainer");
+    const loadingDiv = document.getElementById("loading");
+    const searchInput = document.getElementById("searchInput");
+    const messageDiv = document.getElementById("message");
+    const totalItemsEl = document.getElementById("totalItems");
+    const publishedItemsEl = document.getElementById("publishedItems");
+    const draftItemsEl = document.getElementById("draftItems");
+
+    let editingItemId = null;
+    let allItems = [];
+
+    function showMessage(text, type) {
+      messageDiv.textContent = text;
+      messageDiv.className = `message ${type}`;
+    }
+
+    function clearMessage() {
+      messageDiv.textContent = "";
+      messageDiv.className = "message";
+    }
+
+    function resetForm() {
+      form.reset();
+      editingItemId = null;
+      formTitle.textContent = "Create New Item";
+      submitButton.textContent = "Create Item";
+      submitButton.disabled = false;
+      cancelEditButton.style.display = "none";
+    }
+
+    function getFormData() {
+      return {
+        title: document.getElementById("title").value.trim(),
+        description: document.getElementById("description").value.trim(),
+        category: document.getElementById("category").value,
+        status: document.getElementById("status").value,
+        tags: document.getElementById("tags").value
+          .split(",")
+          .map(tag => tag.trim())
+          .filter(tag => tag !== ""),
+        published: document.getElementById("published").value === "true"
+      };
+    }
+
+    function fillForm(item) {
+      document.getElementById("title").value = item.title || "";
+      document.getElementById("description").value = item.description || "";
+      document.getElementById("category").value = item.category || "project";
+      document.getElementById("status").value = item.status || "draft";
+      document.getElementById("published").value = String(item.published);
+      document.getElementById("tags").value = (item.tags || []).join(", ");
+    }
+
+    function updateStats(items) {
+      totalItemsEl.textContent = items.length;
+      publishedItemsEl.textContent = items.filter(item => item.published === true).length;
+      draftItemsEl.textContent = items.filter(item => item.status === "draft").length;
+    }
+
+    function formatDate(value) {
+      if (!value) return "-";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      return date.toLocaleString();
+    }
+
+    function getStatusClass(status) {
+      if (status === "published") return "status-published";
+      if (status === "archived") return "status-archived";
+      return "status-draft";
+    }
+
+    function renderItems(items) {
+      itemsContainer.innerHTML = "";
+
+      if (!items || items.length === 0) {
+        itemsContainer.innerHTML = '<div class="empty-state">No matching items found.</div>';
+        return;
+      }
+
+      items.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "item-card";
+
+        const tagsHtml = (item.tags || [])
+          .map(tag => `<span class="tag">${tag}</span>`)
+          .join("");
+
+        card.innerHTML = `
+          <h3>${item.title || "Untitled"}</h3>
+          <p>${item.description || "No description"}</p>
+          <div class="status-row">
+            <span class="status-badge ${getStatusClass(item.status)}">${item.status || "-"}</span>
+            <span class="item-meta">Published: ${item.published}</span>
+          </div>
+          <div class="item-meta">Category: ${item.category || "-"}</div>
+          <div class="item-meta">Created: ${formatDate(item.createdAt)}</div>
+          <div class="item-meta">Updated: ${formatDate(item.updatedAt)}</div>
+          <div class="item-meta">Item ID: ${item.itemId}</div>
+          <div class="tags">${tagsHtml || "<span class=\"item-meta\">No tags</span>"}</div>
+          <div class="item-actions">
+            <button class="secondary-btn" data-action="edit" data-id="${item.itemId}">Edit</button>
+            <button class="danger-btn" data-action="delete" data-id="${item.itemId}">Delete</button>
+          </div>
+        `;
+
+        itemsContainer.appendChild(card);
+      });
+    }
+
+    function filterAndRender() {
+      const keyword = searchInput.value.trim().toLowerCase();
+
+      const filtered = allItems.filter(item => {
+        const title = (item.title || "").toLowerCase();
+        const category = (item.category || "").toLowerCase();
+        return title.includes(keyword) || category.includes(keyword);
+      });
+
+      renderItems(filtered);
+      updateStats(allItems);
+    }
+
+    async function loadItems() {
+      loadingDiv.style.display = "block";
+      itemsContainer.innerHTML = "";
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/items`);
+        const data = await response.json();
+
+        allItems = data.items || [];
+        allItems.sort((a, b) => (b.updatedAt || "").localeCompare(a.updatedAt || ""));
+
+        filterAndRender();
+      } catch (error) {
+        console.error("Error loading items:", error);
+        itemsContainer.innerHTML = '<div class="empty-state">Failed to load items.</div>';
+      } finally {
+        loadingDiv.style.display = "none";
+      }
+    }
+
+    async function createItem(itemData) {
+      const response = await fetch(`${API_BASE_URL}/items`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(itemData)
+      });
+
+      return response.json().then(data => ({ ok: response.ok, data }));
+    }
+
+    async function updateItem(itemId, itemData) {
+      const response = await fetch(`${API_BASE_URL}/items/${itemId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(itemData)
+      });
+
+      return response.json().then(data => ({ ok: response.ok, data }));
+    }
+
+    async function deleteItem(itemId) {
+      const response = await fetch(`${API_BASE_URL}/items/${itemId}`, {
+        method: "DELETE"
+      });
+
+      return response.json().then(data => ({ ok: response.ok, data }));
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearMessage();
+      submitButton.disabled = true;
+
+      const itemData = getFormData();
+
+      try {
+        let result;
+
+        if (editingItemId) {
+          result = await updateItem(editingItemId, itemData);
+        } else {
+          result = await createItem(itemData);
+        }
+
+        if (result.ok) {
+          showMessage(editingItemId ? "Item updated successfully." : "Item created successfully.", "success");
+          resetForm();
+          await loadItems();
+        } else {
+          showMessage(result.data.message || "Request failed.", "error");
+          submitButton.disabled = false;
+        }
+      } catch (error) {
+        console.error("Submit error:", error);
+        showMessage("Request failed.", "error");
+        submitButton.disabled = false;
+      }
+    });
+
+    cancelEditButton.addEventListener("click", () => {
+      resetForm();
+      clearMessage();
+    });
+
+    searchInput.addEventListener("input", filterAndRender);
+
+    itemsContainer.addEventListener("click", async (event) => {
+      const button = event.target.closest("button");
+      if (!button) return;
+
+      const action = button.dataset.action;
+      const itemId = button.dataset.id;
+      const item = allItems.find(i => i.itemId === itemId);
+      if (!item) return;
+
+      if (action === "edit") {
+        editingItemId = itemId;
+        fillForm(item);
+        formTitle.textContent = "Edit Item";
+        submitButton.textContent = "Update Item";
+        cancelEditButton.style.display = "inline-block";
+        clearMessage();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      if (action === "delete") {
+        const confirmed = window.confirm(`Delete "${item.title}"?`);
+        if (!confirmed) return;
+
+        clearMessage();
+
+        try {
+          const result = await deleteItem(itemId);
+
+          if (result.ok) {
+            if (editingItemId === itemId) {
+              resetForm();
+            }
+            showMessage("Item deleted successfully.", "success");
+            await loadItems();
+          } else {
+            showMessage(result.data.message || "Delete failed.", "error");
+          }
+        } catch (error) {
+          console.error("Delete error:", error);
+          showMessage("Delete failed.", "error");
+        }
+      }
+    });
+
+    loadItems();
+  </script>
+</body>
+</html>
