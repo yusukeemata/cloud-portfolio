@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <style>
+      .title { font: 700 38px Arial, sans-serif; fill: #1f2937; }
+      .section { font: 700 24px Arial, sans-serif; fill: #1f2937; }
+      .label { font: 700 20px Arial, sans-serif; fill: #111827; }
+      .small { font: 16px Arial, sans-serif; fill: #374151; }
+      .tiny { font: 14px Arial, sans-serif; fill: #4b5563; }
+      .box { rx: 16; ry: 16; stroke: #cbd5e1; stroke-width: 2; }
+      .arrow { stroke: #475569; stroke-width: 3; fill: none; }
+      .dashed { stroke-dasharray: 8 8; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#f8fafc"/>
+
+  <text x="800" y="60" text-anchor="middle" class="title">AWS Serverless Architecture Portfolio</text>
+  <text x="800" y="98" text-anchor="middle" class="small">Static website · Contact form · CRUD API · Admin authentication · Monitoring</text>
+
+  <!-- User -->
+  <circle cx="800" cy="150" r="26" fill="#334155"/>
+  <rect x="770" y="180" width="60" height="36" rx="18" fill="#334155"/>
+  <text x="800" y="250" text-anchor="middle" class="label">User</text>
+
+  <!-- Main flow -->
+  <rect x="690" y="290" width="220" height="78" class="box" fill="#fde68a"/>
+  <text x="800" y="335" text-anchor="middle" class="label">Amazon CloudFront</text>
+
+  <rect x="690" y="420" width="220" height="78" class="box" fill="#bbf7d0"/>
+  <text x="800" y="465" text-anchor="middle" class="label">Amazon S3</text>
+  <text x="800" y="490" text-anchor="middle" class="tiny">Static frontend hosting</text>
+
+  <rect x="690" y="550" width="220" height="78" class="box" fill="#ddd6fe"/>
+  <text x="800" y="595" text-anchor="middle" class="label">Amazon Cognito</text>
+  <text x="800" y="620" text-anchor="middle" class="tiny">Hosted UI authentication</text>
+
+  <rect x="690" y="680" width="220" height="78" class="box" fill="#fdba74"/>
+  <text x="800" y="725" text-anchor="middle" class="label">Amazon API Gateway</text>
+  <text x="800" y="750" text-anchor="middle" class="tiny">JWT authorizer + REST APIs</text>
+
+  <rect x="690" y="810" width="220" height="78" class="box" fill="#fecaca"/>
+  <text x="800" y="855" text-anchor="middle" class="label">AWS Lambda</text>
+
+  <rect x="690" y="920" width="220" height="60" class="box" fill="#bfdbfe"/>
+  <text x="800" y="957" text-anchor="middle" class="label">Amazon DynamoDB</text>
+
+  <!-- arrows -->
+  <line x1="800" y1="216" x2="800" y2="290" class="arrow" marker-end="url(#arrow)"/>
+  <line x1="800" y1="368" x2="800" y2="420" class="arrow" marker-end="url(#arrow)"/>
+  <line x1="800" y1="498" x2="800" y2="550" class="arrow" marker-end="url(#arrow)"/>
+  <line x1="800" y1="628" x2="800" y2="680" class="arrow" marker-end="url(#arrow)"/>
+  <line x1="800" y1="758" x2="800" y2="810" class="arrow" marker-end="url(#arrow)"/>
+  <line x1="800" y1="888" x2="800" y2="920" class="arrow" marker-end="url(#arrow)"/>
+
+  <!-- Left callouts -->
+  <rect x="120" y="420" width="300" height="88" class="box" fill="#ecfccb"/>
+  <text x="270" y="462" text-anchor="middle" class="label">Project #1</text>
+  <text x="270" y="490" text-anchor="middle" class="small">Static Website Hosting</text>
+
+  <rect x="120" y="660" width="300" height="88" class="box" fill="#e0f2fe"/>
+  <text x="270" y="702" text-anchor="middle" class="label">Project #2</text>
+  <text x="270" y="730" text-anchor="middle" class="small">Serverless Contact Form</text>
+
+  <!-- Right callouts -->
+  <rect x="1180" y="660" width="300" height="88" class="box" fill="#ffedd5"/>
+  <text x="1330" y="702" text-anchor="middle" class="label">Project #3</text>
+  <text x="1330" y="730" text-anchor="middle" class="small">Portfolio CRUD API</text>
+
+  <rect x="1180" y="550" width="300" height="88" class="box" fill="#ede9fe"/>
+  <text x="1330" y="592" text-anchor="middle" class="label">Project #4</text>
+  <text x="1330" y="620" text-anchor="middle" class="small">Authenticated Admin Dashboard</text>
+
+  <rect x="1180" y="830" width="300" height="120" class="box" fill="#fee2e2"/>
+  <text x="1330" y="872" text-anchor="middle" class="label">Project #5</text>
+  <text x="1330" y="900" text-anchor="middle" class="small">Monitoring System</text>
+  <text x="1330" y="926" text-anchor="middle" class="tiny">CloudWatch metrics, logs, alarms, SNS</text>
+
+  <!-- connectors -->
+  <line x1="420" y1="464" x2="690" y2="464" class="arrow dashed" marker-end="url(#arrow)"/>
+  <line x1="420" y1="704" x2="690" y2="719" class="arrow dashed" marker-end="url(#arrow)"/>
+
+  <line x1="910" y1="719" x2="1180" y2="704" class="arrow dashed" marker-end="url(#arrow)"/>
+  <line x1="910" y1="589" x2="1180" y2="594" class="arrow dashed" marker-end="url(#arrow)"/>
+  <line x1="910" y1="850" x2="1180" y2="890" class="arrow dashed" marker-end="url(#arrow)"/>
+
+  <!-- monitoring stack -->
+  <rect x="1030" y="830" width="120" height="46" class="box" fill="#fde68a"/>
+  <text x="1090" y="858" text-anchor="middle" class="tiny">CloudWatch</text>
+  <text x="1090" y="874" text-anchor="middle" class="tiny">Metrics</text>
+
+  <rect x="1030" y="886" width="120" height="46" class="box" fill="#fde68a"/>
+  <text x="1090" y="914" text-anchor="middle" class="tiny">CloudWatch</text>
+  <text x="1090" y="930" text-anchor="middle" class="tiny">Logs</text>
+
+  <rect x="1030" y="942" width="120" height="46" class="box" fill="#fde68a"/>
+  <text x="1090" y="970" text-anchor="middle" class="tiny">Alarms / SNS</text>
+
+  <line x1="910" y1="950" x2="1030" y2="853" class="arrow" marker-end="url(#arrow)"/>
+
+  <!-- footer note -->
+  <text x="800" y="995" text-anchor="middle" class="tiny">Designed for README / GitHub portfolio overview</text>
+</svg>
