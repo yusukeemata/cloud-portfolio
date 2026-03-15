@@ -28,7 +28,7 @@ These projects showcase end-to-end AWS system design using modern serverless ser
 
 # Architecture Diagram
 
-![Architecture](architecture/architecture-diagram.png)
+![Architecture](architecture/architecture-diagram-clean.svg)
 
 # Architecture Overview
 
