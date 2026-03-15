@@ -26,6 +26,10 @@ These projects showcase end-to-end AWS system design using modern serverless ser
 
 ---
 
+# Architecture Diagram
+
+Architecture diagram will be added here.
+
 # Architecture Overview
 
 This portfolio demonstrates a fully serverless architecture built on AWS.
