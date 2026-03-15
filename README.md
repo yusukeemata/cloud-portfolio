@@ -1,160 +1,191 @@
-# Cloud Portfolio – Serverless CRUD Application
+# AWS Serverless Portfolio
 
-This project is a serverless portfolio management application built on AWS.
+This repository contains hands-on AWS projects designed to demonstrate practical cloud architecture skills using serverless technologies.
 
-It allows administrators to create and manage portfolio projects using a simple web interface.
+The goal of this portfolio is to showcase real AWS architecture patterns including authentication, API design, serverless compute, data storage, and monitoring.
 
-## Overview
+---
 
-The application uses a static frontend and a serverless backend.
+# Architecture Overview
 
-- The frontend is built with HTML and JavaScript
-- The backend uses Amazon API Gateway, AWS Lambda, and Amazon DynamoDB
-- The backend infrastructure can also be deployed with AWS CloudFormation
+This portfolio demonstrates a fully serverless architecture on AWS.
 
-## Architecture
+Main services used:
 
-User (Browser)
-      │
-      ▼
+* Amazon S3 (Static website hosting)
+* Amazon CloudFront (CDN)
+* Amazon Cognito (Authentication)
+* Amazon API Gateway (Secure API layer)
+* AWS Lambda (Serverless compute)
+* Amazon DynamoDB (NoSQL database)
+* Amazon CloudWatch (Monitoring and observability)
+
+Architecture flow:
+
+User
+↓
 CloudFront
-      │
-      ▼
-S3 (Static Website)
-      │
-      ▼
-API Gateway
-      │
-      ▼
+↓
+S3 (Static Frontend)
+↓
+Amazon Cognito Authentication
+↓
+API Gateway (JWT Authorizer)
+↓
 Lambda
-      │
-      ▼
+↓
 DynamoDB
 
-AWS services used in this project:
+Monitoring:
 
-- Amazon S3
-- Amazon CloudFront
-- Amazon API Gateway
-- AWS Lambda
-- Amazon DynamoDB
-- Amazon Route 53
-- AWS Certificate Manager (ACM)
-- AWS CloudFormation
+Lambda / API Gateway / DynamoDB
+↓
+CloudWatch Metrics
+↓
+CloudWatch Logs
+↓
+CloudWatch Alarms
 
-## Features
+---
 
-- Public portfolio page
-- Admin page for CRUD operations
-- Create new portfolio items
-- Read all items
-- Read a single item
-- Update existing items
-- Delete items
-- Custom API domain
-- Infrastructure as Code with CloudFormation
+# Portfolio Projects
 
-## Repository Structure
+## Project #1 — Static Website Hosting
 
-```text
-cloud-portfolio
-│
-├─ README.md
-│
-├─ frontend
-│  ├─ projects.html
-│  └─ admin.html
-│
-└─ infrastructure
-   └─ template.yaml
-```
+A globally distributed static website hosted on AWS.
 
-## Frontend
+Services used:
 
-The frontend is stored in the `frontend` directory.
+* Amazon S3
+* Amazon CloudFront
+* Route53
+* AWS Certificate Manager (ACM)
 
-- `projects.html`
-  - Public portfolio page
-  - Displays portfolio items from the API
+Key concepts:
 
-- `admin.html`
-  - Admin page
-  - Supports create, update, and delete operations
+* Static site hosting
+* CDN distribution
+* HTTPS configuration
+* Custom domain setup
 
-## Backend
+---
 
-The backend is built with:
+## Project #2 — Serverless Contact Form
 
-- Amazon API Gateway
-- AWS Lambda
-- Amazon DynamoDB
+A contact form implemented using a serverless backend.
 
-Main API routes:
+Services used:
 
-```text
-POST   /items
-GET    /items
-GET    /items/{id}
-PUT    /items/{id}
-DELETE /items/{id}
-```
+* Amazon API Gateway
+* AWS Lambda
+* Amazon SES
 
-## Infrastructure as Code
+Key concepts:
 
-The CloudFormation template is stored here:
+* API design
+* Serverless backend
+* Email integration
 
-```text
-infrastructure/template.yaml
-```
+---
 
-This template deploys the backend resources, including:
+## Project #3 — Portfolio CRUD API
 
-- DynamoDB table
-- Lambda function
-- IAM role
-- HTTP API
-- API routes
-- Lambda invoke permissions
+A serverless backend API for managing portfolio data.
 
-## Live URLs
+Services used:
 
-Public page:
+* Amazon API Gateway
+* AWS Lambda
+* Amazon DynamoDB
 
-```text
-https://yusuke-cloud.org/projects.html
-```
+Key concepts:
 
-Admin page:
+* REST API design
+* CRUD operations
+* NoSQL data modeling
 
-```text
-https://yusuke-cloud.org/admin.html
-```
+---
 
-Custom API domain:
+## Project #4 — Authenticated Admin Dashboard
 
-```text
-https://api.yusuke-cloud.org/items
-```
+A secure admin dashboard that allows authenticated users to manage portfolio items.
 
-## What I Learned
+Services used:
 
-Through this project, I practiced:
+* Amazon Cognito (Hosted UI authentication)
+* Amazon API Gateway (JWT Authorizer)
+* AWS Lambda
+* Amazon DynamoDB
 
-- Building a serverless CRUD API on AWS
-- Connecting a static frontend to a backend API
-- Using DynamoDB as a NoSQL database
-- Creating a custom domain for API Gateway with Route 53 and ACM
-- Reproducing backend infrastructure using CloudFormation
-- Organizing a cloud project in GitHub
+Features:
 
-## Future Improvements
+* Cognito login
+* JWT-based authentication
+* Secure API access
+* CRUD operations
+* Logout functionality
 
-- Add authentication for the admin page
-- Restrict public write access
-- Improve UI/UX further
-- Add monitoring and alarms
-- Extend CloudFormation to include more resources
+Security flow:
 
-## Author
+1. User logs in via Cognito Hosted UI
+2. Cognito issues a JWT token
+3. The frontend includes the token in API requests
+4. API Gateway validates the JWT
+5. Authorized requests reach Lambda functions
 
-Yusuke Emata
+Unauthenticated requests are blocked by API Gateway authorization.
+
+---
+
+## Project #5 — Serverless Monitoring System
+
+A monitoring system for serverless workloads using Amazon CloudWatch.
+
+Services used:
+
+* Amazon CloudWatch Metrics
+* Amazon CloudWatch Logs
+* Amazon CloudWatch Alarms
+
+Monitoring features:
+
+* API Gateway request monitoring
+* Lambda execution metrics
+* Log collection and analysis
+* CloudWatch alarms for abnormal behavior
+
+This project demonstrates operational visibility and monitoring for serverless architectures.
+
+---
+
+# Technologies Used
+
+AWS S3
+AWS CloudFront
+Amazon Cognito
+Amazon API Gateway
+AWS Lambda
+Amazon DynamoDB
+Amazon CloudWatch
+JavaScript
+
+---
+
+# Key Concepts Demonstrated
+
+Serverless architecture
+Authentication with Cognito
+JWT authorization
+REST API design
+NoSQL database integration
+Cloud monitoring and observability
+Secure API access patterns
+
+---
+
+# Author
+
+AWS Certified Solutions Architect – Associate
+PMP / PMI-ACP Certified Project Manager
+
+Currently building hands-on AWS architectures while transitioning into a cloud engineering role.
