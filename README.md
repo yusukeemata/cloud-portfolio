@@ -37,10 +37,10 @@ Architecture flow:
 User
   │
   ▼
-CloudFront (CDN)
+CloudFront
   │
   ▼
-S3 Static Frontend
+S3 (Static Frontend)
   │
   ▼
 Amazon Cognito Authentication
@@ -49,10 +49,10 @@ Amazon Cognito Authentication
 API Gateway (JWT Authorizer)
   │
   ▼
-AWS Lambda
+Lambda
   │
   ▼
-Amazon DynamoDB
+DynamoDB
 ```
 
 Monitoring layer:
@@ -70,7 +70,7 @@ Lambda / API Gateway / DynamoDB
      CloudWatch Alarms
           │
           ▼
-        SNS Alerts
+        SNS Notifications
 ```
 
 ---
