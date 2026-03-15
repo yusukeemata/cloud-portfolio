@@ -335,7 +335,7 @@ This portfolio highlights several important AWS architecture concepts:
 
 Yusuke Emata
 
-AWS Certified Solutions Architect – Associate
+AWS Certified Solutions Architect – Associate, 
 PMP / PMI-ACP Certified Project Manager
 
 Focused on designing and implementing serverless architectures on AWS, combining cloud engineering with strong project management experience.
