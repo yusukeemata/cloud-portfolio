@@ -1,8 +1,18 @@
-# AWS Serverless Portfolio
+# AWS Serverless Architecture Portfolio
 
-This repository contains hands-on AWS projects designed to demonstrate practical cloud architecture skills using serverless technologies.
+Yusuke Emata
 
-The goal of this portfolio is to showcase real AWS architecture patterns including authentication, API design, serverless compute, data storage, and monitoring.
+This repository contains hands-on AWS projects implementing real serverless architecture patterns on AWS.
+
+The portfolio demonstrates practical cloud architecture including:
+
+* authentication
+* secure API design
+* serverless compute
+* data storage
+* monitoring and observability
+
+These projects showcase end-to-end AWS system design using modern serverless services.
 
 ---
 
@@ -10,15 +20,16 @@ The goal of this portfolio is to showcase real AWS architecture patterns includi
 
 This portfolio demonstrates a fully serverless architecture on AWS.
 
-Main services used:
+Main AWS services used:
 
-* Amazon S3 (Static website hosting)
-* Amazon CloudFront (CDN)
+* Amazon S3 (Static frontend hosting)
+* Amazon CloudFront (Global CDN)
 * Amazon Cognito (Authentication)
 * Amazon API Gateway (Secure API layer)
 * AWS Lambda (Serverless compute)
 * Amazon DynamoDB (NoSQL database)
-* Amazon CloudWatch (Monitoring and observability)
+* Amazon CloudWatch (Monitoring)
+* Amazon SNS (Alert notifications)
 
 Architecture flow:
 
@@ -36,7 +47,7 @@ Lambda
 ↓
 DynamoDB
 
-Monitoring:
+Monitoring layer:
 
 Lambda / API Gateway / DynamoDB
 ↓
@@ -45,6 +56,8 @@ CloudWatch Metrics
 CloudWatch Logs
 ↓
 CloudWatch Alarms
+↓
+SNS Notifications
 
 ---
 
@@ -58,15 +71,25 @@ Services used:
 
 * Amazon S3
 * Amazon CloudFront
-* Route53
+* Amazon Route 53
 * AWS Certificate Manager (ACM)
 
-Key concepts:
+Key concepts demonstrated:
 
 * Static site hosting
 * CDN distribution
 * HTTPS configuration
 * Custom domain setup
+
+Architecture:
+
+User
+↓
+CloudFront
+↓
+S3 Static Website
+↓
+Route53 + ACM
 
 ---
 
@@ -79,12 +102,26 @@ Services used:
 * Amazon API Gateway
 * AWS Lambda
 * Amazon SES
+* Amazon CloudFront
 
-Key concepts:
+Key concepts demonstrated:
 
 * API design
 * Serverless backend
-* Email integration
+* Event-driven email workflow
+* Integration between frontend and backend services
+
+Architecture:
+
+User
+↓
+CloudFront
+↓
+API Gateway
+↓
+Lambda
+↓
+SES Email Delivery
 
 ---
 
@@ -98,11 +135,22 @@ Services used:
 * AWS Lambda
 * Amazon DynamoDB
 
-Key concepts:
+Key concepts demonstrated:
 
 * REST API design
 * CRUD operations
 * NoSQL data modeling
+* Serverless backend architecture
+
+Architecture:
+
+Client
+↓
+API Gateway
+↓
+Lambda
+↓
+DynamoDB
 
 ---
 
@@ -116,13 +164,15 @@ Services used:
 * Amazon API Gateway (JWT Authorizer)
 * AWS Lambda
 * Amazon DynamoDB
+* Amazon S3
+* Amazon CloudFront
 
-Features:
+Key features:
 
-* Cognito login
+* Cognito Hosted UI login
 * JWT-based authentication
-* Secure API access
-* CRUD operations
+* Secure API authorization
+* Protected CRUD operations
 * Logout functionality
 
 Security flow:
@@ -130,10 +180,26 @@ Security flow:
 1. User logs in via Cognito Hosted UI
 2. Cognito issues a JWT token
 3. The frontend includes the token in API requests
-4. API Gateway validates the JWT
+4. API Gateway validates the JWT token
 5. Authorized requests reach Lambda functions
 
-Unauthenticated requests are blocked by API Gateway authorization.
+Unauthorized requests are blocked by API Gateway authorization.
+
+Architecture:
+
+Admin User
+↓
+CloudFront
+↓
+S3 Admin UI
+↓
+Cognito Hosted UI Authentication
+↓
+API Gateway (JWT Authorizer)
+↓
+Lambda
+↓
+DynamoDB
 
 ---
 
@@ -146,6 +212,7 @@ Services used:
 * Amazon CloudWatch Metrics
 * Amazon CloudWatch Logs
 * Amazon CloudWatch Alarms
+* Amazon SNS
 
 Monitoring features:
 
@@ -153,39 +220,74 @@ Monitoring features:
 * Lambda execution metrics
 * Log collection and analysis
 * CloudWatch alarms for abnormal behavior
+* SNS alert notifications
 
 This project demonstrates operational visibility and monitoring for serverless architectures.
+
+Architecture:
+
+Lambda / API Gateway / DynamoDB
+↓
+CloudWatch Metrics
+↓
+CloudWatch Logs
+↓
+CloudWatch Alarms
+↓
+SNS Notifications
 
 ---
 
 # Technologies Used
 
-AWS S3
-AWS CloudFront
-Amazon Cognito
-Amazon API Gateway
-AWS Lambda
-Amazon DynamoDB
-Amazon CloudWatch
-JavaScript
+AWS Services
+
+* Amazon S3
+* Amazon CloudFront
+* Amazon Cognito
+* Amazon API Gateway
+* AWS Lambda
+* Amazon DynamoDB
+* Amazon CloudWatch
+* Amazon SNS
+* Amazon SES
+
+Languages / Tools
+
+* JavaScript
+* HTML / CSS
+* Serverless architecture patterns
 
 ---
 
 # Key Concepts Demonstrated
 
-Serverless architecture
-Authentication with Cognito
-JWT authorization
-REST API design
-NoSQL database integration
-Cloud monitoring and observability
-Secure API access patterns
+This portfolio highlights several important AWS architecture concepts:
+
+* Serverless architecture design
+* Secure authentication with Cognito
+* JWT authorization with API Gateway
+* REST API design
+* NoSQL database integration
+* Cloud monitoring and observability
+* Secure API access patterns
+* End-to-end AWS system integration
 
 ---
 
 # Author
 
+Yusuke Emata
+
 AWS Certified Solutions Architect – Associate
 PMP / PMI-ACP Certified Project Manager
 
-Currently building hands-on AWS architectures while transitioning into a cloud engineering role.
+Focused on designing and implementing serverless architectures on AWS, combining cloud engineering with strong project management experience.
+
+---
+
+# Portfolio Website
+
+You can view the live portfolio here:
+
+https://yusuke-cloud.org
