@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yusuke Emata | AWS Cloud Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg-soft: #111a2e;
+      --card: #ffffff;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --heading: #f8fafc;
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --border: rgba(148, 163, 184, 0.18);
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      --card-text: #1f2937;
+      --card-muted: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.18), transparent 28%),
+        linear-gradient(180deg, #08111f 0%, #0b1220 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: rgba(8, 17, 31, 0.78);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-weight: bold;
+      color: var(--heading);
+      letter-spacing: 0.4px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav a:hover {
+      color: var(--heading);
+    }
+
+    .hero {
+      padding: 72px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-main,
+    .hero-side,
+    .about-card,
+    .skill-card {
+      background: rgba(17, 26, 46, 0.82);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 36px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: 48px;
+      line-height: 1.1;
+      color: var(--heading);
+    }
+
+    .hero p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 680px;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 22px 0 28px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      background: rgba(56, 189, 248, 0.1);
+      color: #dbeafe;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: bold;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #06243a;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      color: white;
+    }
+
+    .btn-secondary {
+      border-color: var(--border);
+      color: var(--heading);
+      background: transparent;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+      color: var(--primary);
+    }
+
+    .hero-side {
+      padding: 28px;
+    }
+
+    .hero-side h2 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: var(--heading);
+      font-size: 22px;
+    }
+
+    .quick-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .quick-item {
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .quick-item strong {
+      display: block;
+      color: var(--heading);
+      margin-bottom: 4px;
+    }
+
+    .quick-item span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    section {
+      padding: 28px 0;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      color: var(--heading);
+      font-size: 30px;
+    }
+
+    .section-subtitle {
+      margin: 0 0 24px;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .about-card {
+      padding: 28px;
+    }
+
+    .about-card p {
+      margin: 0;
+      color: var(--text);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      background: #ffffff;
+      color: var(--card-text);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(203, 213, 225, 0.7);
+    }
+
+    .project-number {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: bold;
+      color: #0369a1;
+      background: #e0f2fe;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .project-card h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+
+    .project-card p {
+      margin: 0 0 14px;
+      color: var(--card-muted);
+      font-size: 15px;
+    }
+
+    .project-focus {
+      margin: 0 0 14px;
+      font-size: 14px;
+      color: #0f172a;
+      font-weight: bold;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .stack-tag {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .project-link {
+      color: #0369a1;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .skill-card {
+      border-radius: 18px;
+      padding: 18px;
+      min-height: 112px;
+    }
+
+    .skill-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--heading);
+      font-size: 16px;
+    }
+
+    .skill-card span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .cta {
+      padding-bottom: 56px;
+    }
+
+    .cta-card {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(14, 165, 233, 0.1));
+      border: 1px solid rgba(56, 189, 248, 0.24);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-card h2 {
+      margin: 0 0 10px;
+      color: var(--heading);
+    }
+
+    .cta-card p {
+      margin: 0 0 18px;
+      color: var(--text);
+      max-width: 760px;
+    }
+
+    footer {
+      padding: 0 0 40px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .project-grid,
+      .skill-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">Yusuke Emata | AWS Cloud Portfolio</div>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="README.html">Documentation</a>
+        <a href="https://github.com/">GitHub</a>
+        <a href="https://yusuke-cloud.org/admin.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <span class="eyebrow">AWS / Cloud Engineer Portfolio</span>
+          <h1>Designing and building secure serverless systems on AWS</h1>
+          <p>
+            I design and build hands-on AWS projects focused on serverless architecture,
+            authentication, secure APIs, and monitoring, backed by a strong project management foundation.
+          </p>
+          <div class="hero-chips">
+            <span class="chip">AWS Solutions Architect – Associate</span>
+            <span class="chip">PMP</span>
+            <span class="chip">PMI-ACP</span>
+            <span class="chip">Serverless Architecture</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <a class="btn btn-secondary" href="README.html">View Documentation</a>
+            <a class="btn btn-secondary" href="https://github.com/">GitHub</a>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <h2>What you can review here</h2>
+          <div class="quick-list">
+            <div class="quick-item">
+              <strong>Hands-on AWS Projects</strong>
+              <span>Five practical projects covering static hosting, serverless APIs, authentication, and monitoring.</span>
+            </div>
+            <div class="quick-item">
+              <strong>Security Design</strong>
+              <span>Authenticated admin dashboard with Cognito Hosted UI and JWT-protected APIs.</span>
+            </div>
+            <div class="quick-item">
+              <strong>Observability</strong>
+              <span>CloudWatch-based monitoring with logs, metrics, alarms, and notification workflows.</span>
+            </div>
+            <div class="quick-item">
+              <strong>Documentation</strong>
+              <span>Project summaries, architecture decisions, and implementation details designed for technical review.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About</h2>
+        <p class="section-subtitle">
+          This portfolio is built to show practical AWS architecture ability through implemented projects, not certifications alone.
+        </p>
+        <div class="about-card">
+          <p>
+            My background is in project management, supported by PMP and PMI-ACP certifications.
+            I have expanded that foundation into cloud engineering by designing and implementing AWS projects
+            focused on static hosting, serverless applications, authentication flows, secure APIs, and monitoring.
+            This site is both a technical portfolio and a structured record of the systems I have built on AWS.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Featured AWS Projects</h2>
+        <p class="section-subtitle">
+          These projects are structured to demonstrate architecture thinking, implementation ability, and end-to-end AWS integration.
+        </p>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <span class="project-number">Project #1</span>
+            <h3>Static Website Hosting</h3>
+            <p>Global static hosting with HTTPS and custom domain configuration.</p>
+            <div class="project-focus">Key focus: S3 + CloudFront + Route 53 + ACM</div>
+            <div class="project-stack">
+              <span class="stack-tag">S3</span>
+              <span class="stack-tag">CloudFront</span>
+              <span class="stack-tag">Route 53</span>
+              <span class="stack-tag">ACM</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link" href="README.html#project-1">Project Details</a>
+              <a class="project-link" href="https://github.com/">GitHub</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <span class="project-number">Project #2</span>
+            <h3>Serverless Contact Form</h3>
+            <p>Contact form built with a serverless backend and email delivery workflow.</p>
+            <div class="project-focus">Key focus: API Gateway + Lambda + SES</div>
+            <div class="project-stack">
+              <span class="stack-tag">API Gateway</span>
+              <span class="stack-tag">Lambda</span>
+              <span class="stack-tag">SES</span>
+              <span class="stack-tag">CloudFront</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link" href="README.html#project-2">Project Details</a>
+              <a class="project-link" href="https://github.com/">GitHub</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <span class="project-number">Project #3</span>
+            <h3>Portfolio CRUD API</h3>
+            <p>Serverless API for creating, reading, updating, and deleting portfolio items.</p>
+            <div class="project-focus">Key focus: CRUD API + Lambda + DynamoDB</div>
+            <div class="project-stack">
+              <span class="stack-tag">API Gateway</span>
+              <span class="stack-tag">Lambda</span>
+              <span class="stack-tag">DynamoDB</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link" href="README.html#project-3">Project Details</a>
+              <a class="project-link" href="https://github.com/">GitHub</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <span class="project-number">Project #4</span>
+            <h3>Authenticated Admin Dashboard</h3>
+            <p>Secure admin dashboard with Cognito Hosted UI, JWT authorization, and protected CRUD APIs.</p>
+            <div class="project-focus">Key focus: authentication + authorization + protected admin flow</div>
+            <div class="project-stack">
+              <span class="stack-tag">Cognito</span>
+              <span class="stack-tag">JWT</span>
+              <span class="stack-tag">API Gateway</span>
+              <span class="stack-tag">Lambda</span>
+              <span class="stack-tag">DynamoDB</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link" href="README.html#project-4">Project Details</a>
+              <a class="project-link" href="https://yusuke-cloud.org/admin.html">Admin Dashboard</a>
+              <a class="project-link" href="https://github.com/">GitHub</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <span class="project-number">Project #5</span>
+            <h3>Serverless Monitoring System</h3>
+            <p>Monitoring and observability design for serverless workloads using metrics, logs, alarms, and notifications.</p>
+            <div class="project-focus">Key focus: CloudWatch + alarm design + SNS notifications</div>
+            <div class="project-stack">
+              <span class="stack-tag">CloudWatch</span>
+              <span class="stack-tag">Metrics</span>
+              <span class="stack-tag">Logs</span>
+              <span class="stack-tag">Alarms</span>
+              <span class="stack-tag">SNS</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link" href="README.html#project-5">Project Details</a>
+              <a class="project-link" href="https://github.com/">GitHub</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">Skills & Certifications</h2>
+        <p class="section-subtitle">
+          A combination of hands-on AWS implementation, architecture thinking, and structured project delivery.
+        </p>
+
+        <div class="skill-grid">
+          <div class="skill-card">
+            <strong>AWS Services</strong>
+            <span>S3, CloudFront, Route 53, ACM, API Gateway, Lambda, DynamoDB, Cognito, CloudWatch, SNS, SES</span>
+          </div>
+          <div class="skill-card">
+            <strong>Architecture</strong>
+            <span>Serverless design, secure API patterns, authentication flow, CRUD systems, and observability</span>
+          </div>
+          <div class="skill-card">
+            <strong>Certifications</strong>
+            <span>AWS Solutions Architect – Associate, PMP, PMI-ACP</span>
+          </div>
+          <div class="skill-card">
+            <strong>Strengths</strong>
+            <span>Structured learning, project ownership, documentation, and end-to-end implementation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-card">
+          <h2>Built to demonstrate practical AWS implementation</h2>
+          <p>
+            This portfolio is designed to highlight real AWS implementation work across hosting,
+            serverless applications, authentication, protected APIs, and monitoring.
+            It is intended for technical reviewers, hiring managers, and teams looking for someone
+            who can learn quickly, design clearly, and build end to end on AWS.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Explore Projects</a>
+            <a class="btn btn-secondary" href="README.html">Read Documentation</a>
+            <a class="btn btn-secondary" href="https://github.com/">View GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Yusuke Emata | AWS Cloud Portfolio
+    </div>
+  </footer>
+</body>
+</html>
