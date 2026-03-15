@@ -4,12 +4,12 @@ Yusuke Emata
 
 This repository contains hands-on AWS projects implementing real serverless architecture patterns on AWS.
 
-The portfolio demonstrates practical cloud architecture including:
+The goal of this portfolio is to demonstrate practical cloud architecture including:
 
-* authentication
-* secure API design
-* serverless compute
-* data storage
+* serverless application design
+* secure authentication
+* REST API architecture
+* NoSQL data storage
 * monitoring and observability
 
 These projects showcase end-to-end AWS system design using modern serverless services.
@@ -18,46 +18,60 @@ These projects showcase end-to-end AWS system design using modern serverless ser
 
 # Architecture Overview
 
-This portfolio demonstrates a fully serverless architecture on AWS.
+This portfolio demonstrates a fully serverless architecture built on AWS.
 
 Main AWS services used:
 
-* Amazon S3 (Static frontend hosting)
-* Amazon CloudFront (Global CDN)
-* Amazon Cognito (Authentication)
-* Amazon API Gateway (Secure API layer)
-* AWS Lambda (Serverless compute)
-* Amazon DynamoDB (NoSQL database)
-* Amazon CloudWatch (Monitoring)
-* Amazon SNS (Alert notifications)
+* Amazon S3 — Static frontend hosting
+* Amazon CloudFront — Global CDN
+* Amazon Cognito — Authentication
+* Amazon API Gateway — Secure API layer
+* AWS Lambda — Serverless compute
+* Amazon DynamoDB — NoSQL database
+* Amazon CloudWatch — Monitoring
+* Amazon SNS — Alert notifications
 
 Architecture flow:
 
+```
 User
-↓
-CloudFront
-↓
-S3 (Static Frontend)
-↓
+  │
+  ▼
+CloudFront (CDN)
+  │
+  ▼
+S3 Static Frontend
+  │
+  ▼
 Amazon Cognito Authentication
-↓
+  │
+  ▼
 API Gateway (JWT Authorizer)
-↓
-Lambda
-↓
-DynamoDB
+  │
+  ▼
+AWS Lambda
+  │
+  ▼
+Amazon DynamoDB
+```
 
 Monitoring layer:
 
+```
 Lambda / API Gateway / DynamoDB
-↓
-CloudWatch Metrics
-↓
-CloudWatch Logs
-↓
-CloudWatch Alarms
-↓
-SNS Notifications
+          │
+          ▼
+   CloudWatch Metrics
+          │
+          ▼
+     CloudWatch Logs
+          │
+          ▼
+     CloudWatch Alarms
+          │
+          ▼
+        SNS Alerts
+```
 
 ---
 
@@ -83,13 +97,18 @@ Key concepts demonstrated:
 
 Architecture:
 
+```
 User
-↓
+  │
+  ▼
 CloudFront
-↓
+  │
+  ▼
 S3 Static Website
-↓
+  │
+  ▼
 Route53 + ACM
+```
 
 ---
 
@@ -109,19 +128,25 @@ Key concepts demonstrated:
 * API design
 * Serverless backend
 * Event-driven email workflow
-* Integration between frontend and backend services
+* Frontend ↔ backend integration
 
 Architecture:
 
+```
 User
-↓
+  │
+  ▼
 CloudFront
-↓
+  │
+  ▼
 API Gateway
-↓
+  │
+  ▼
 Lambda
-↓
-SES Email Delivery
+  │
+  ▼
+Amazon SES
+```
 
 ---
 
@@ -144,13 +169,18 @@ Key concepts demonstrated:
 
 Architecture:
 
+```
 Client
-↓
+  │
+  ▼
 API Gateway
-↓
+  │
+  ▼
 Lambda
-↓
+  │
+  ▼
 DynamoDB
+```
 
 ---
 
@@ -177,29 +207,37 @@ Key features:
 
 Security flow:
 
-1. User logs in via Cognito Hosted UI
-2. Cognito issues a JWT token
-3. The frontend includes the token in API requests
+1. User logs in through Cognito Hosted UI
+2. Cognito issues a JWT access token
+3. Frontend includes the token in API requests
 4. API Gateway validates the JWT token
-5. Authorized requests reach Lambda functions
+5. Authorized requests are forwarded to Lambda
 
 Unauthorized requests are blocked by API Gateway authorization.
 
 Architecture:
 
+```
 Admin User
-↓
+    │
+    ▼
 CloudFront
-↓
+    │
+    ▼
 S3 Admin UI
-↓
-Cognito Hosted UI Authentication
-↓
+    │
+    ▼
+Cognito Hosted UI
+    │
+    ▼
 API Gateway (JWT Authorizer)
-↓
+    │
+    ▼
 Lambda
-↓
+    │
+    ▼
 DynamoDB
+```
 
 ---
 
@@ -218,23 +256,27 @@ Monitoring features:
 
 * API Gateway request monitoring
 * Lambda execution metrics
-* Log collection and analysis
+* Log aggregation and analysis
 * CloudWatch alarms for abnormal behavior
-* SNS alert notifications
-
-This project demonstrates operational visibility and monitoring for serverless architectures.
+* SNS notifications for alerts
 
 Architecture:
 
+```
 Lambda / API Gateway / DynamoDB
-↓
-CloudWatch Metrics
-↓
-CloudWatch Logs
-↓
-CloudWatch Alarms
-↓
-SNS Notifications
+          │
+          ▼
+   CloudWatch Metrics
+          │
+          ▼
+     CloudWatch Logs
+          │
+          ▼
+     CloudWatch Alarms
+          │
+          ▼
+        SNS Alerts
+```
 
 ---
 
@@ -288,6 +330,6 @@ Focused on designing and implementing serverless architectures on AWS, combining
 
 # Portfolio Website
 
-You can view the live portfolio here:
+Live site:
 
 https://yusuke-cloud.org
