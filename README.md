@@ -36,10 +36,12 @@ These projects showcase end-to-end AWS system design using modern serverless ser
 
 This portfolio demonstrates a fully serverless web application architecture built on AWS.
 
-The system is designed around a globally distributed static frontend served by Amazon CloudFront and Amazon S3.  
+The system is designed around a globally distributed static frontend served by Amazon CloudFront and Amazon S3.
+AWS WAF is integrated with the CloudFront distribution to protect the edge layer from common web exploits and malicious traffic.
+
 User authentication is handled by Amazon Cognito using a hosted UI and JWT-based authorization.
 
-Authenticated requests are sent to Amazon API Gateway, which validates the JWT token before forwarding requests to AWS Lambda functions.  
+Authenticated requests are sent to Amazon API Gateway, which validates the JWT token before forwarding requests to AWS Lambda functions.
 Lambda functions implement the backend business logic and interact with Amazon DynamoDB for persistent storage.
 
 Operational visibility is achieved through Amazon CloudWatch metrics and logs, with CloudWatch alarms triggering Amazon SNS notifications for alerting.
