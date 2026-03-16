@@ -45,7 +45,7 @@ Main AWS services used:
 * Amazon CloudWatch — Monitoring
 * Amazon SNS — Alert notifications
 
-## Architecture Principles
+# Architecture Principles
 
 This portfolio architecture follows several core cloud architecture principles.
 
