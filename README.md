@@ -167,6 +167,12 @@ Lambda
 Amazon SES
 ```
 
+Why this architecture:
+
+API Gateway provides a managed API endpoint for receiving form submissions.  
+Lambda processes incoming requests without requiring server management.  
+SES handles reliable email delivery with minimal operational overhead.
+
 ---
 
 ## Project #3 — Portfolio CRUD API
@@ -200,6 +206,11 @@ Lambda
   ▼
 DynamoDB
 ```
+Why this architecture:
+
+API Gateway exposes a REST API endpoint.  
+Lambda functions implement the application logic.  
+DynamoDB stores portfolio data with low latency and automatic scaling.
 
 ---
 
@@ -257,6 +268,11 @@ Lambda
     ▼
 DynamoDB
 ```
+Why this architecture:
+
+Cognito provides managed authentication without implementing a custom login system.  
+API Gateway JWT authorizers enforce secure API access.  
+Lambda and DynamoDB enable a fully serverless backend.
 
 ---
 
@@ -296,6 +312,11 @@ Lambda / API Gateway / DynamoDB
           ▼
         SNS Alerts
 ```
+Why this architecture:
+
+CloudWatch provides centralized monitoring for serverless workloads.  
+Metrics and logs allow visibility into system behavior.  
+CloudWatch alarms detect abnormal patterns and trigger SNS notifications.
 
 ---
 
