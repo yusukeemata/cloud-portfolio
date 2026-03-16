@@ -278,7 +278,12 @@ Lambda and DynamoDB enable a fully serverless backend.
 
 ## Project #5 — Serverless Monitoring System
 
-A monitoring system for serverless workloads using Amazon CloudWatch.
+## Project #5 — Serverless Monitoring System
+
+A monitoring and alerting system for the serverless architecture using Amazon CloudWatch and Amazon SNS.
+
+This project adds observability to the portfolio architecture by monitoring
+Lambda, API Gateway, and DynamoDB workloads.
 
 Services used:
 
@@ -294,6 +299,12 @@ Monitoring features:
 * Log aggregation and analysis
 * CloudWatch alarms for abnormal behavior
 * SNS notifications for alerts
+
+Example monitoring rules:
+
+• Lambda Errors >= 1 within 5 minutes  
+• API Gateway 5XX errors >= 1  
+• DynamoDB WriteThrottleEvents >= 1
 
 Architecture:
 
