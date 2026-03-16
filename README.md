@@ -64,49 +64,6 @@ Amazon CloudWatch provides centralized monitoring through metrics, logs, and ala
 ### Loose coupling
 Frontend, authentication, API, compute, and database layers are clearly separated, allowing independent scaling and development of each component.
 
-
-# Architecture flow:
-
-```
-User
-  │
-  ▼
-CloudFront
-  │
-  ▼
-S3 (Static Frontend)
-  │
-  ▼
-Amazon Cognito Authentication
-  │
-  ▼
-API Gateway (JWT Authorizer)
-  │
-  ▼
-Lambda
-  │
-  ▼
-DynamoDB
-```
-
-Monitoring layer:
-
-```
-Lambda / API Gateway / DynamoDB
-          │
-          ▼
-   CloudWatch Metrics
-          │
-          ▼
-     CloudWatch Logs
-          │
-          ▼
-     CloudWatch Alarms
-          │
-          ▼
-        SNS Notifications
-```
-
 ---
 
 # Portfolio Projects
