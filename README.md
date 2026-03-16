@@ -34,18 +34,17 @@ These projects showcase end-to-end AWS system design using modern serverless ser
 
 # Architecture Overview
 
-This portfolio demonstrates a fully serverless architecture built on AWS.
+This portfolio demonstrates a fully serverless web application architecture built on AWS.
 
-Main AWS services used:
+The system is designed around a globally distributed static frontend served by Amazon CloudFront and Amazon S3.  
+User authentication is handled by Amazon Cognito using a hosted UI and JWT-based authorization.
 
-* Amazon S3 — Static frontend hosting
-* Amazon CloudFront — Global CDN
-* Amazon Cognito — Authentication
-* Amazon API Gateway — Secure API layer
-* AWS Lambda — Serverless compute
-* Amazon DynamoDB — NoSQL database
-* Amazon CloudWatch — Monitoring
-* Amazon SNS — Alert notifications
+Authenticated requests are sent to Amazon API Gateway, which validates the JWT token before forwarding requests to AWS Lambda functions.  
+Lambda functions implement the backend business logic and interact with Amazon DynamoDB for persistent storage.
+
+Operational visibility is achieved through Amazon CloudWatch metrics and logs, with CloudWatch alarms triggering Amazon SNS notifications for alerting.
+
+This architecture demonstrates how modern AWS serverless services can be combined to build scalable, secure, and highly available applications with minimal operational overhead.
 
 # Architecture Principles
 
