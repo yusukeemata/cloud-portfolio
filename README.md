@@ -63,7 +63,8 @@ Amazon CloudWatch provides centralized monitoring through metrics, logs, and ala
 
 ### Loose coupling
 Frontend, authentication, API, compute, and database layers are clearly separated, allowing independent scaling and development of each component.
-Architecture flow:
+
+#Architecture flow:
 
 ```
 User
