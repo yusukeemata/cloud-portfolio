@@ -1,5 +1,7 @@
 # AWS Serverless Architecture Portfolio
 
+Serverless architecture portfolio built on AWS.
+
 Yusuke Emata
 
 # Portfolio Website
