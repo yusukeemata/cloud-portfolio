@@ -123,6 +123,11 @@ S3 Static Website
   ▼
 Route53 + ACM
 ```
+Why this architecture:
+
+S3 provides highly durable and scalable object storage for static content.  
+CloudFront is used to distribute the website globally with low latency and HTTPS support.  
+Route 53 manages the custom domain and routes traffic to the CloudFront distribution.
 
 ---
 
