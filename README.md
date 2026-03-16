@@ -45,25 +45,24 @@ Main AWS services used:
 * Amazon CloudWatch — Monitoring
 * Amazon SNS — Alert notifications
 
-# Architecture Principles
+## Architecture Principles
 
-This portfolio architecture follows several core cloud architecture principles:
+This portfolio architecture follows several core cloud architecture principles.
 
-**Serverless-first design**  
-All backend components are implemented using fully managed serverless services such as AWS Lambda, API Gateway, and DynamoDB to minimize operational overhead.
+### Serverless-first design
+All backend components are implemented using fully managed serverless services such as AWS Lambda, API Gateway, and DynamoDB. This approach minimizes operational overhead and removes the need to manage servers.
 
-**Security by design**  
+### Security by design
 Authentication is handled through Amazon Cognito with JWT authorization enforced by API Gateway. AWS WAF protects the CloudFront edge layer from common web attacks.
 
-**Scalability**  
+### Scalability
 All components are horizontally scalable by default, allowing the system to handle traffic spikes without manual capacity management.
 
-**Observability**  
+### Observability
 Amazon CloudWatch provides centralized monitoring through metrics, logs, and alarms. SNS notifications enable proactive alerting for abnormal system behavior.
 
-**Loose coupling**  
+### Loose coupling
 Frontend, authentication, API, compute, and database layers are clearly separated, allowing independent scaling and development of each component.
-
 Architecture flow:
 
 ```
