@@ -132,6 +132,13 @@
       max-width: 680px;
     }
 
+    .hero-intro {
+      color: #cbd5e1;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
     .hero-chips {
       display: flex;
       flex-wrap: wrap;
@@ -395,13 +402,16 @@
     <div class="container topbar-inner">
       <div class="brand">Yusuke Emata | AWS Cloud Portfolio</div>
       <nav class="nav">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="README.html">Documentation</a>
-        <a href="https://github.com/">GitHub</a>
-        <a href="https://yusuke-cloud.org/admin.html">Admin</a>
-      </nav>
+  <a href="#about">About</a>
+  <a href="#projects">Projects</a>
+  <a href="https://yusuke-cloud.org/projects.html">Live Projects</a>
+  <a href="#skills">Skills</a>
+  <a href="https://github.com/yusukeemata/cloud-portfolio#readme" target="_blank" rel="noopener noreferrer">Documentation</a>
+  <a href="https://github.com/yusukeemata/cloud-portfolio" target="_blank" rel="noopener noreferrer">GitHub</a>
+  <a href="https://www.linkedin.com/in/yusuke-e-6846b3214" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <a href="https://yusuke-cloud.org/contact.html">Contact</a>
+  <a href="https://yusuke-cloud.org/admin.html" target="_blank" rel="noopener noreferrer">Admin</a>
+</nav>
     </div>
   </header>
 
@@ -410,21 +420,22 @@
       <div class="container hero-grid">
         <div class="hero-main">
           <span class="eyebrow">AWS / Cloud Engineer Portfolio</span>
+          <div class="hero-intro">Production-ready serverless applications built on AWS</div>
           <h1>Designing and building secure serverless systems on AWS</h1>
           <p>
             I design and build hands-on AWS projects focused on serverless architecture,
-            authentication, secure APIs, and monitoring, backed by a strong project management foundation.
+            authentication, secure APIs, edge protection, and monitoring, backed by a strong project management foundation.
           </p>
           <div class="hero-chips">
             <span class="chip">AWS Solutions Architect – Associate</span>
             <span class="chip">PMP</span>
             <span class="chip">PMI-ACP</span>
-            <span class="chip">Serverless Architecture</span>
+            <span class="chip">Serverless Architecture (API / Auth / Monitoring)</span>
           </div>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#projects">View Projects</a>
-            <a class="btn btn-secondary" href="README.html">View Documentation</a>
-            <a class="btn btn-secondary" href="https://github.com/">GitHub</a>
+            <a class="btn btn-secondary" href="https://github.com/yusukeemata/cloud-portfolio#readme" target="_blank" rel="noopener noreferrer">View Documentation</a>
+            <a class="btn btn-secondary" href="https://github.com/yusukeemata/cloud-portfolio" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </div>
 
@@ -433,11 +444,11 @@
           <div class="quick-list">
             <div class="quick-item">
               <strong>Hands-on AWS Projects</strong>
-              <span>Five practical projects covering static hosting, serverless APIs, authentication, and monitoring.</span>
+              <span>Five practical projects covering static hosting, serverless APIs, authentication, edge security, and monitoring.</span>
             </div>
             <div class="quick-item">
               <strong>Security Design</strong>
-              <span>Authenticated admin dashboard with Cognito Hosted UI and JWT-protected APIs.</span>
+              <span>Cognito authentication, JWT-protected APIs, and AWS WAF at the CloudFront edge layer.</span>
             </div>
             <div class="quick-item">
               <strong>Observability</strong>
@@ -462,7 +473,7 @@
           <p>
             My background is in project management, supported by PMP and PMI-ACP certifications.
             I have expanded that foundation into cloud engineering by designing and implementing AWS projects
-            focused on static hosting, serverless applications, authentication flows, secure APIs, and monitoring.
+            focused on static hosting, serverless applications, authentication flows, secure APIs, edge protection, and monitoring.
             This site is both a technical portfolio and a structured record of the systems I have built on AWS.
           </p>
         </div>
@@ -479,8 +490,8 @@
         <div class="project-grid">
           <article class="project-card">
             <span class="project-number">Project #1</span>
-            <h3>Static Website Hosting</h3>
-            <p>Global static hosting with HTTPS and custom domain configuration.</p>
+            <h3>Global Static Website Hosting</h3>
+            <p>Global static hosting with HTTPS, custom domain configuration, and CloudFront delivery.</p>
             <div class="project-focus">Key focus: S3 + CloudFront + Route 53 + ACM</div>
             <div class="project-stack">
               <span class="stack-tag">S3</span>
@@ -489,8 +500,7 @@
               <span class="stack-tag">ACM</span>
             </div>
             <div class="project-links">
-              <a class="project-link" href="README.html#project-1">Project Details</a>
-              <a class="project-link" href="https://github.com/">GitHub</a>
+              <a class="project-link" href="https://github.com/yusukeemata/cloud-portfolio#project-1--static-website-hosting" target="_blank" rel="noopener noreferrer">Project Details</a>
             </div>
           </article>
 
@@ -506,15 +516,15 @@
               <span class="stack-tag">CloudFront</span>
             </div>
             <div class="project-links">
-              <a class="project-link" href="README.html#project-2">Project Details</a>
-              <a class="project-link" href="https://github.com/">GitHub</a>
+              <a class="project-link" href="https://github.com/yusukeemata/cloud-portfolio#project-2--serverless-contact-form" target="_blank" rel="noopener noreferrer">Project Details</a>
+            <a class="project-link" href="https://yusuke-cloud.org/contact.html">Live Demo</a>
             </div>
           </article>
 
           <article class="project-card">
             <span class="project-number">Project #3</span>
             <h3>Portfolio CRUD API</h3>
-            <p>Serverless API for creating, reading, updating, and deleting portfolio items.</p>
+            <p>Fully serverless CRUD API built with API Gateway, Lambda, and DynamoDB.</p>
             <div class="project-focus">Key focus: CRUD API + Lambda + DynamoDB</div>
             <div class="project-stack">
               <span class="stack-tag">API Gateway</span>
@@ -522,15 +532,15 @@
               <span class="stack-tag">DynamoDB</span>
             </div>
             <div class="project-links">
-              <a class="project-link" href="README.html#project-3">Project Details</a>
-              <a class="project-link" href="https://github.com/">GitHub</a>
+              <a class="project-link" href="https://github.com/yusukeemata/cloud-portfolio#project-3--portfolio-crud-api" target="_blank" rel="noopener noreferrer">Project Details</a>
+              <a class="project-link" href="https://yusuke-cloud.org/projects.html">Live Demo</a>
             </div>
           </article>
 
           <article class="project-card">
             <span class="project-number">Project #4</span>
             <h3>Authenticated Admin Dashboard</h3>
-            <p>Secure admin dashboard with Cognito Hosted UI, JWT authorization, and protected CRUD APIs.</p>
+            <p>Secure admin dashboard with Cognito authentication, JWT authorization, and protected CRUD APIs.</p>
             <div class="project-focus">Key focus: authentication + authorization + protected admin flow</div>
             <div class="project-stack">
               <span class="stack-tag">Cognito</span>
@@ -540,18 +550,18 @@
               <span class="stack-tag">DynamoDB</span>
             </div>
             <div class="project-links">
-              <a class="project-link" href="README.html#project-4">Project Details</a>
-              <a class="project-link" href="https://yusuke-cloud.org/admin.html">Admin Dashboard</a>
-              <a class="project-link" href="https://github.com/">GitHub</a>
+              <a class="project-link" href="https://github.com/yusukeemata/cloud-portfolio#project-4--authenticated-admin-dashboard" target="_blank" rel="noopener noreferrer">Project Details</a>
+              <a class="project-link" href="https://yusuke-cloud.org/admin.html" target="_blank" rel="noopener noreferrer">Admin Dashboard</a>
             </div>
           </article>
 
           <article class="project-card">
             <span class="project-number">Project #5</span>
             <h3>Serverless Monitoring System</h3>
-            <p>Monitoring and observability design for serverless workloads using metrics, logs, alarms, and notifications.</p>
-            <div class="project-focus">Key focus: CloudWatch + alarm design + SNS notifications</div>
+            <p>Monitoring and observability design for serverless workloads using metrics, logs, alarms, notifications, and edge protection.</p>
+            <div class="project-focus">Key focus: WAF + CloudWatch + alarm design + SNS notifications</div>
             <div class="project-stack">
+              <span class="stack-tag">WAF</span>
               <span class="stack-tag">CloudWatch</span>
               <span class="stack-tag">Metrics</span>
               <span class="stack-tag">Logs</span>
@@ -559,8 +569,7 @@
               <span class="stack-tag">SNS</span>
             </div>
             <div class="project-links">
-              <a class="project-link" href="README.html#project-5">Project Details</a>
-              <a class="project-link" href="https://github.com/">GitHub</a>
+              <a class="project-link" href="https://github.com/yusukeemata/cloud-portfolio#project-5--serverless-monitoring-system" target="_blank" rel="noopener noreferrer">Project Details</a>
             </div>
           </article>
         </div>
@@ -577,11 +586,11 @@
         <div class="skill-grid">
           <div class="skill-card">
             <strong>AWS Services</strong>
-            <span>S3, CloudFront, Route 53, ACM, API Gateway, Lambda, DynamoDB, Cognito, CloudWatch, SNS, SES</span>
+            <span>S3, CloudFront, Route 53, ACM, API Gateway, Lambda, DynamoDB, Cognito, CloudWatch, SNS, SES, WAF</span>
           </div>
           <div class="skill-card">
             <strong>Architecture</strong>
-            <span>Serverless design, secure API patterns, authentication flow, CRUD systems, and observability</span>
+            <span>Serverless design, secure API patterns, authentication flow, CRUD systems, edge protection, and observability</span>
           </div>
           <div class="skill-card">
             <strong>Certifications</strong>
@@ -589,31 +598,45 @@
           </div>
           <div class="skill-card">
             <strong>Strengths</strong>
-            <span>Structured learning, project ownership, documentation, and end-to-end implementation</span>
+            <span>End-to-end AWS system design, structured problem solving, and team collaboration through strong communication and ownership</span>
           </div>
         </div>
       </div>
     </section>
 
     <section class="cta">
-      <div class="container">
-        <div class="cta-card">
-          <h2>Built to demonstrate practical AWS implementation</h2>
-          <p>
-            This portfolio is designed to highlight real AWS implementation work across hosting,
-            serverless applications, authentication, protected APIs, and monitoring.
-            It is intended for technical reviewers, hiring managers, and teams looking for someone
-            who can learn quickly, design clearly, and build end to end on AWS.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">Explore Projects</a>
-            <a class="btn btn-secondary" href="README.html">Read Documentation</a>
-            <a class="btn btn-secondary" href="https://github.com/">View GitHub</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+  <div class="container">
+    <div class="cta-card">
+      <h2>Looking for a Cloud Engineer?</h2>
+      <p>
+        This portfolio demonstrates hands-on AWS implementation across serverless architecture,
+        secure API design, authentication, and monitoring.
+        I focus on building real, production-oriented systems using services such as
+        S3, CloudFront, API Gateway, Lambda, DynamoDB, Cognito, and CloudWatch.
+      </p>
+      <p>
+        With a background in project management (PMP, PMI-ACP),
+        I bring structured thinking, ownership, and end-to-end delivery capability
+        to cloud engineering projects.
+      </p>
+
+      <div class="hero-actions">
+  <a class="btn btn-primary" href="https://yusuke-cloud.org/projects.html">
+    View Live Projects
+  </a>
+
+  <a class="btn btn-secondary" href="https://github.com/yusukeemata/cloud-portfolio#readme" target="_blank" rel="noopener noreferrer">
+    Architecture
+  </a>
+
+  <a class="btn btn-secondary" href="https://github.com/yusukeemata/cloud-portfolio" target="_blank" rel="noopener noreferrer">
+    GitHub
+  </a>
+</div>   
+</div>
+  </div>
+</section>
+</main>
 
   <footer>
     <div class="container">
