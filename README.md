@@ -4,12 +4,20 @@ Serverless architecture portfolio built on AWS.
 
 Yusuke Emata
 
-# Portfolio Website
+---
 
-Live site  
+## Live Demo
+
+Main site  
 https://yusuke-cloud.org
 
-Admin dashboard  
+Live projects (public CRUD demo)  
+https://yusuke-cloud.org/projects.html
+
+Contact form  
+https://yusuke-cloud.org/contact.html
+
+Admin dashboard (authentication required)  
 https://yusuke-cloud.org/admin.html
 
 ---
@@ -113,6 +121,9 @@ Route 53 manages the custom domain and routes traffic to the CloudFront distribu
 
 ## Project #2 — Serverless Contact Form
 
+Live Demo:
+https://yusuke-cloud.org/contact.html
+
 A contact form implemented using a serverless backend.
 
 Services used:
@@ -156,6 +167,9 @@ SES handles reliable email delivery with minimal operational overhead.
 ---
 
 ## Project #3 — Portfolio CRUD API
+
+Live Demo:
+https://yusuke-cloud.org/projects.html
 
 A serverless backend API for managing portfolio data.
 
