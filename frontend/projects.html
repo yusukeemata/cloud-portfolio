@@ -283,6 +283,7 @@
     const draftItemsEl = document.getElementById("draftItems");
 
     let allItems = [];
+    let publicItems = [];
 
     function updateStats(items) {
       totalItemsEl.textContent = items.length;
@@ -307,7 +308,7 @@
       itemsContainer.innerHTML = "";
 
       if (!items || items.length === 0) {
-        itemsContainer.innerHTML = '<div class="empty-state">No matching items found.</div>';
+        itemsContainer.innerHTML = '<div class="empty-state">No published items found.</div>';
         return;
       }
 
@@ -339,7 +340,7 @@
     function filterAndRender() {
       const keyword = searchInput.value.trim().toLowerCase();
 
-      const filtered = allItems.filter(item => {
+      const filtered = publicItems.filter(item => {
         const title = (item.title || "").toLowerCase();
         const category = (item.category || "").toLowerCase();
         return title.includes(keyword) || category.includes(keyword);
@@ -359,6 +360,8 @@
 
         allItems = data.items || [];
         allItems.sort((a, b) => (b.updatedAt || "").localeCompare(a.updatedAt || ""));
+
+        publicItems = allItems.filter(item => item.published === true);
 
         filterAndRender();
       } catch (error) {
