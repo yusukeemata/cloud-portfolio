@@ -190,6 +190,8 @@ https://yusuke-cloud.org/projects.html
 
 A serverless backend API for managing portfolio data.
 
+Infrastructure is defined using AWS CloudFormation (see template.yaml).
+
 Services used:
 
 * Amazon API Gateway
