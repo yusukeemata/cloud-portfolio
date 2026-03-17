@@ -77,6 +77,23 @@ Frontend, authentication, API, compute, and database layers are clearly separate
 
 ---
 
+# Infrastructure as Code (IaC)
+
+This project includes Infrastructure as Code using AWS CloudFormation.
+
+The template defines:
+
+- DynamoDB table for portfolio data
+- IAM roles and permissions for Lambda
+- Backend configuration for the serverless API
+
+Template:
+https://github.com/yusukeemata/cloud-portfolio/blob/main/infrastructure/template.yaml
+
+This ensures the backend infrastructure can be deployed in a reproducible and consistent way.
+
+---
+
 # Portfolio Projects
 
 ## Project #1 — Static Website Hosting
