@@ -334,9 +334,20 @@ Lambda / API Gateway / DynamoDB
 ```
 Why this architecture:
 
-CloudWatch provides centralized monitoring for serverless workloads.  
-Metrics and logs allow visibility into system behavior.  
-CloudWatch alarms detect abnormal patterns and trigger SNS notifications.
+CloudWatch provides centralized monitoring across serverless services.  
+Metrics and logs enable visibility into system behavior and performance.  
+CloudWatch alarms detect abnormal patterns such as increased error rates.  
+SNS enables real-time notifications, allowing rapid response to incidents.
+
+Monitoring Evidence:
+
+The monitoring system was tested by intentionally triggering errors in the Lambda function.
+
+#### CloudWatch Alarm Triggered
+![CloudWatch Alarm](architecture/project5-alarm.png)
+
+#### SNS Email Notification
+![SNS Notification](architecture/project5-sns.png)
 
 ---
 
