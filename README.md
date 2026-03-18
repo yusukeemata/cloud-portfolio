@@ -8,17 +8,17 @@ Yusuke Emata
 
 ## Live Demo
 
-Main site  
+Portfolio site  
 https://yusuke-cloud.org
 
-Live projects (public CRUD demo)  
+Public API demo (CRUD)  
 https://yusuke-cloud.org/projects.html
+
+Admin dashboard (authenticated)  
+https://yusuke-cloud.org/admin.html
 
 Contact form  
 https://yusuke-cloud.org/contact.html
-
-Admin dashboard (authentication required)  
-https://yusuke-cloud.org/admin.html
 
 ---
 
@@ -98,6 +98,7 @@ Template:
 https://github.com/yusukeemata/cloud-portfolio/blob/main/infrastructure/template.yaml
 
 This ensures the backend infrastructure can be deployed in a reproducible and consistent way.
+This demonstrates infrastructure reproducibility and aligns with real-world DevOps practices.
 
 ---
 
