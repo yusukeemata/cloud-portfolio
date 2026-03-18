@@ -1,6 +1,6 @@
 # AWS Serverless Architecture Portfolio
 
-Serverless architecture portfolio built on AWS.
+Serverless portfolio demonstrating end-to-end AWS architecture, including authentication, API design, database integration, and monitoring.
 
 Yusuke Emata
 
