@@ -36,11 +36,11 @@ These projects showcase end-to-end AWS system design using modern serverless ser
 
 ---
 
-# Architecture Diagram
+## Architecture Diagram
 
 ![Architecture](architecture/architecture-diagram-clean.svg)
 
-# Architecture Overview
+## Architecture Overview
 
 This portfolio demonstrates a fully serverless web application architecture built on AWS.
 
@@ -56,28 +56,35 @@ Operational visibility is achieved through Amazon CloudWatch metrics and logs, w
 
 This architecture demonstrates how modern AWS serverless services can be combined to build scalable, secure, and highly available applications with minimal operational overhead.
 
-# Architecture Principles
+## Architecture Principles
 
-This portfolio architecture follows several core cloud architecture principles.
+This portfolio follows key cloud architecture principles:
 
-### Serverless-first design
-All backend components are implemented using fully managed serverless services such as AWS Lambda, API Gateway, and DynamoDB. This approach minimizes operational overhead and removes the need to manage servers.
+#### Serverless-first design
+- Fully managed services (Lambda, API Gateway, DynamoDB)
+- No server management required
+- Reduced operational overhead
 
-### Security by design
-Authentication is handled through Amazon Cognito with JWT authorization enforced by API Gateway. AWS WAF protects the CloudFront edge layer from common web attacks.
+#### Security by design
+- Authentication via Amazon Cognito
+- JWT authorization enforced by API Gateway
+- AWS WAF protects the edge layer
 
-### Scalability
-All components are horizontally scalable by default, allowing the system to handle traffic spikes without manual capacity management.
+#### Scalability
+- All components scale horizontally by default
+- Handles traffic spikes automatically
 
-### Observability
-Amazon CloudWatch provides centralized monitoring through metrics, logs, and alarms. SNS notifications enable proactive alerting for abnormal system behavior.
+#### Observability
+- Centralized monitoring with CloudWatch (metrics, logs, alarms)
+- SNS enables real-time alerting
 
-### Loose coupling
-Frontend, authentication, API, compute, and database layers are clearly separated, allowing independent scaling and development of each component.
+#### Loose coupling
+- Clear separation between frontend, API, compute, and database
+- Independent development and scaling of each layer
 
 ---
 
-# Infrastructure as Code (IaC)
+## Infrastructure as Code (IaC)
 
 This project includes Infrastructure as Code using AWS CloudFormation.
 
@@ -94,7 +101,7 @@ This ensures the backend infrastructure can be deployed in a reproducible and co
 
 ---
 
-# Portfolio Projects
+## Portfolio Projects
 
 ## Project #1 — Static Website Hosting
 
@@ -349,9 +356,11 @@ The monitoring system was tested by intentionally triggering errors in the Lambd
 #### SNS Email Notification
 ![SNS Notification](architecture/project5-sns.png)
 
+This demonstrates that the monitoring system is fully functional and capable of detecting failures and sending real-time alerts.
+
 ---
 
-# Technologies Used
+## Technologies Used
 
 AWS Services
 
@@ -373,7 +382,7 @@ Languages / Tools
 
 ---
 
-# Key Concepts Demonstrated
+## Key Concepts Demonstrated
 
 This portfolio highlights several important AWS architecture concepts:
 
@@ -388,7 +397,7 @@ This portfolio highlights several important AWS architecture concepts:
 
 ---
 
-# Author
+## Author
 
 Yusuke Emata
 
@@ -399,7 +408,7 @@ Focused on designing and implementing serverless architectures on AWS, combining
 
 ---
 
-# Portfolio Website
+## Portfolio Website
 
 Live site:
 
