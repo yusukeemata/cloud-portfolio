@@ -407,6 +407,8 @@ PMP / PMI-ACP Certified Project Manager
 
 Focused on designing and implementing serverless architectures on AWS, combining cloud engineering with strong project management experience.
 
+https://linkedin.com/in/yusuke-e-6846b3214
+
 ---
 
 ## Portfolio Website
