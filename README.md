@@ -26,11 +26,11 @@ This repository contains hands-on AWS projects implementing real serverless arch
 
 The goal of this portfolio is to demonstrate practical cloud architecture including:
 
-* serverless application design
-* secure authentication
+* Serverless application design
+* Secure authentication
 * REST API architecture
 * NoSQL data storage
-* monitoring and observability
+* Monitoring and observability
 
 These projects showcase end-to-end AWS system design using modern serverless services.
 
