@@ -1,0 +1,51 @@
+{
+  "framework": "PMBOK 8th Edition",
+  "last_updated": "2026-07",
+  "principles": [
+    {
+      "name": "Adopt a Holistic View",
+      "name_ja": "全体像の捉え方",
+      "definition": "Understand and manage projects by considering all components and their interdependencies as part of a larger system."
+    },
+    {
+      "name": "Embed Quality Into Processes and Deliverables",
+      "name_ja": "プロセスと成果物への品質の組み込み",
+      "definition": "Translate requirements into executable activities to meet stakeholder expectations, utilizing continuous improvement."
+    },
+    {
+      "name": "Be an Accountable Leader",
+      "name_ja": "説明責任あるリーダーシップ",
+      "definition": "Take ownership of objectives, decisions, and actions; fostering trust, psychological safety, and shared leadership."
+    },
+    {
+      "name": "Build an Empowered Culture",
+      "name_ja": "エンパワーメントされた文化の構築",
+      "definition": "Promote mutual trust, clear roles, team agreements, and a collaborative environment that leverages diversity."
+    },
+    {
+      "name": "Focus on Value",
+      "name_ja": "価値への集中",
+      "definition": "Continually adjust project alignment to strategic objectives, prioritizing outcomes over outputs."
+    },
+    {
+      "name": "Integrate Sustainability Within All Project Areas",
+      "name_ja": "全領域における持続可能性の統合",
+      "definition": "Meet present needs without compromising future generations by balancing the triple bottom line: people, profit, and planet."
+    }
+  ],
+  "governance_domain": {
+    "description": "The framework, functions, and processes that guide project management decisions to optimize value delivery.",
+    "core_metrics": ["Target Metrics", "Signaling Mechanisms", "Feedback Mechanisms"],
+    "processes": [
+      {"name": "Initiate Project or Phase", "focus_area": "Initiating"},
+      {"name": "Integrate and Align Project Plans", "focus_area": "Planning"},
+      {"name": "Plan Sourcing Strategy", "focus_area": "Planning"},
+      {"name": "Manage Project Execution", "focus_area": "Executing"},
+      {"name": "Manage Quality Assurance", "focus_area": "Executing"},
+      {"name": "Manage Project Knowledge", "focus_area": "Executing"},
+      {"name": "Monitor & Control Project Performance", "focus_area": "Monitoring & Controlling"},
+      {"name": "Assess and Implement Changes", "focus_area": "Monitoring & Controlling"},
+      {"name": "Close Project or Phase", "focus_area": "Closing"}
+    ]
+  }
+}
