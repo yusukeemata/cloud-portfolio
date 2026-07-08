@@ -361,6 +361,46 @@ This demonstrates that the monitoring system is fully functional and capable of 
 
 ---
 
+## Project #6 — AI-Driven PM Insights Pipeline
+
+An automated data pipeline that ingests external technology trends and maps them into technical project management insights using Generative AI.
+
+Services used:
+
+* Amazon Bedrock (Claude 3 Haiku)
+* AWS Lambda (Python)
+* Amazon DynamoDB
+* Amazon Translate
+
+Key concepts demonstrated:
+
+* Secure Prompt Isolation (Externalized instruction assets)
+* On-Demand Cost Optimization (Serverless GenAI execution)
+* Dynamic context orchestration
+* Multi-language data tag modeling
+
+Architecture:
+
+```
+     Tech RSS Feed
+          │
+          ▼
+      AWS Lambda  ◄─── Read JSON Prompt Matrix (prompts/pmbok_8th_rules.json)
+          │
+          ▼
+     Amazon Bedrock
+          │
+          ▼
+     DynamoDB Storage
+
+```
+
+Why this architecture:
+
+AWS Lambda orchestrates the execution on demand, keeping idle costs at absolute zero. To enforce security and clean configuration management, prompt structures are decoupled entirely into a separate `prompts/` directory inside the repository, preventing prompt injection risks. Bedrock (Claude 3 Haiku) delivers fast, precise semantic mappings against the modern PMBOK 8th Edition framework under an on-demand pricing model, optimizing processing efficiency before expanding into downstream UI streaming layers.
+
+---
+
 ## Technologies Used
 
 AWS Services
@@ -374,6 +414,8 @@ AWS Services
 * Amazon CloudWatch
 * Amazon SNS
 * Amazon SES
+* Amazon Bedrock
+* Amazon Translate
 
 Languages / Tools
 
