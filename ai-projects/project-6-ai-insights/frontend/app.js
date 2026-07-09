@@ -1,7 +1,7 @@
 // app.js - Portfolio Project #6 AI Pipeline Orchestrator
 document.addEventListener('DOMContentLoaded', () => {
     // ⚠️ Replace this string with your deployed API Gateway Invoke URL once staged
-    const API_ENDPOINT = 'YOUR_API_GATEWAY_INVOKE_URL_HERE/insights';
+    const API_ENDPOINT = 'https://16s42opvi7.execute-api.us-east-1.amazonaws.com/prod/insights';
 
     const newsTitle = document.getElementById('news-title');
     const newsDesc = document.getElementById('news-desc');
