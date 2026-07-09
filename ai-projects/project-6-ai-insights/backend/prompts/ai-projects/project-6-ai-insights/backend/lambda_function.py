@@ -43,9 +43,9 @@ def lambda_handler(event, context):
     target_article = articles[0]
 
     # 3. AI Orchestration Layer: Construct prompt payload and invoke Amazon Bedrock
-    # On-Demand Cost Optimization: Using Claude 3 Haiku for cost-effective semantic processing
+    # On-Demand Cost Optimization: Using Claude Haiku 4.5 for cost-effective semantic processing
     bedrock = boto3.client(service_name='bedrock-runtime', region_name='us-east-1')
-    model_id = "anthropic.claude-3-haiku-20240307-v1:0" 
+    model_id = "anthropic.claude-4-5-haiku-20260307-v1:0" 
 
     # Inject external prompt matrix and dynamic target news safely into instructions
     prompt_content = f"""
