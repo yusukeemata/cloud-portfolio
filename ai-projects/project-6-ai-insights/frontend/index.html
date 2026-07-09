@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project #6 - PMBOK 8th AI Insights Pipeline</title>
+    <link rel="stylesheet" href="../../../frontend/css/style.css">
+    <style>
+        /* Project #6 専用のダッシュボードレイアウト */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        .insight-card {
+            background: var(--card-bg, #ffffff);
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color, #e0e0e0);
+        }
+        .badge-pmbok {
+            background-color: #0284c7;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .loading-skeleton {
+            color: #71717a;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Yusuke | Cloud Portfolio</div>
+            <ul>
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../projects.html" class="active">Projects</a></li>
+                <li><a href="../../../admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2>Project #6: Serverless PMBOK 8th AI Insights Pipeline</h2>
+        <p class="project-desc">
+            An automated data pipeline integrating raw technology RSS feeds with generative AI (Amazon Bedrock) 
+            to produce strategic project management impact assessments under the PMBOK 8th Edition framework.
+        </p>
+
+        <div class="dashboard-container">
+            
+            <div class="insight-card" id="source-news-card">
+                <span class="badge-pmbok" style="background-color: #4b5563;">Ingested Source News</span>
+                <h3 id="news-title" class="loading-skeleton">Fetching latest dynamic news tech stream...</h3>
+                <p id="news-desc">The pipeline is pulling live data from AWS RSS infrastructure channels.</p>
+                <div style="margin-top: 20px;">
+                    <a id="news-link" href="#" target="_blank" class="btn" style="display: none;">View Original News Release</a>
+                </div>
+            </div>
+
+            <div class="insight-card" id="ai-analysis-card">
+                <span class="badge-pmbok">PMBOK 8th Strategic Alignment</span>
+                <div id="analysis-content" class="loading-skeleton">
+                    Waiting for Claude 3 Haiku to model strategic governance insights...
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
