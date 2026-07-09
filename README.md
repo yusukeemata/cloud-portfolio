@@ -367,7 +367,7 @@ An automated data pipeline that ingests external technology trends and maps them
 
 Services used:
 
-* Amazon Bedrock (Claude 3 Haiku)
+* Amazon Bedrock (Claude Haiku 4.5)
 * AWS Lambda (Python)
 * Amazon DynamoDB
 * Amazon Translate
@@ -397,7 +397,7 @@ Architecture:
 
 Why this architecture:
 
-AWS Lambda orchestrates the execution on demand, keeping idle costs at absolute zero. To enforce security and clean configuration management, prompt structures are decoupled entirely into a separate `prompts/` directory inside the repository, preventing prompt injection risks. Bedrock (Claude 3 Haiku) delivers fast, precise semantic mappings against the modern PMBOK 8th Edition framework under an on-demand pricing model, optimizing processing efficiency before expanding into downstream UI streaming layers.
+AWS Lambda orchestrates the execution on demand, keeping idle costs at absolute zero. To enforce security and clean configuration management, prompt structures are decoupled entirely into a separate `prompts/` directory inside the repository, preventing prompt injection risks. Bedrock (Claude Haiku 4.5) delivers fast, precise semantic mappings against the modern PMBOK 8th Edition framework under an on-demand pricing model, optimizing processing efficiency before expanding into downstream UI streaming layers.
 
 ---
 
