@@ -6,10 +6,10 @@ import boto3
 
 def lambda_handler(event, context):
     """
-    Phase 2: RSSニュースを取得し、隔離されたJSONルールブックを読み込み、
-    Amazon Bedrock (Claude) でPMBOK 8th視点の分析インサイトを生成する
+    Phase 2: Ingests tech RSS news feeds, loads the securely isolated JSON prompt matrix,
+    and invokes Amazon Bedrock (Claude 3 Haiku) to generate PMBOK 8th Edition strategic insights.
     """
-    # 1. プロンプトファイル(JSONルールブック)の読み込み
+    # 1. Secure Prompt Isolation: Load the externalized PMBOK 8th rules asset
     rules_path = os.path.join(os.path.dirname(__file__), 'prompts', 'pmbok_8th_rules.json')
     try:
         with open(rules_path, 'r', encoding='utf-8') as f:
@@ -18,7 +18,7 @@ def lambda_handler(event, context):
         print(f"Failed to load PMBOK rules: {str(e)}")
         pmbok_rules = {}
 
-    # 2. テックニュース（RSSフィード）の収集
+    # 2. Ingestion Layer: Fetch latest technology updates from external RSS feed
     rss_url = "https://aws.amazon.com/about-aws/whats-new/recent/feed/"
     articles = []
     try:
@@ -27,7 +27,8 @@ def lambda_handler(event, context):
             xml_data = response.read()
             
         root = ET.fromstring(xml_data)
-        for item in root.findall('.//item')[:1]:  # テスト時は最も最新の1件に絞って処理
+        # Limit to the most recent article for isolated validation and processing efficiency
+        for item in root.findall('.//item')[:1]:  
             title = item.find('title').text if item.find('title') is not None else "No Title"
             link = item.find('link').text if item.find('link') is not None else ""
             description = item.find('description').text if item.find('description') is not None else ""
@@ -41,12 +42,12 @@ def lambda_handler(event, context):
 
     target_article = articles[0]
 
-    # 3. Amazon Bedrock (Claude) の呼び出し準備
-    # ※定義書のコスト最適化戦略に基づき、開発・検証時は最安の Haiku を使用
+    # 3. AI Orchestration Layer: Construct prompt payload and invoke Amazon Bedrock
+    # On-Demand Cost Optimization: Using Claude 3 Haiku for cost-effective semantic processing
     bedrock = boto3.client(service_name='bedrock-runtime', region_name='us-east-1')
     model_id = "anthropic.claude-3-haiku-20240307-v1:0" 
 
-    # 外部化したルールブックとニュースを結合してプロンプト（指示文）を組み立てる
+    # Inject external prompt matrix and dynamic target news safely into instructions
     prompt_content = f"""
 You are an expert Technical Project Manager. Analyze the following technology news item using the PMBOK 8th Edition framework provided below.
 
@@ -63,7 +64,7 @@ Description: {target_article['description']}
 3. Output the response strictly in Japanese.
 """
 
-    # Bedrock (Anthropic API) の要求フォーマットに整形
+    # Format the payload to strictly match Anthropic's model expectations
     body = json.dumps({
         "anthropic_version": "bedrock-2023-05-31",
         "max_tokens": 1000,
@@ -76,7 +77,7 @@ Description: {target_article['description']}
     })
 
     try:
-        # Claudeモデルの呼び出し実行
+        # Execute the serverless foundation model invocation
         response = bedrock.invoke_model(body=body, modelId=model_id)
         response_body = json.loads(response.get('body').read())
         ai_insight = response_body['content'][0]['text']
@@ -84,7 +85,7 @@ Description: {target_article['description']}
         print(f"Bedrock invocation failed: {str(e)}")
         ai_insight = f"Failed to generate AI insight due to an error: {str(e)}"
 
-    # 4. 最終成果（ニュース情報 + PMBOK分析インサイト）を返却
+    # 4. Outbound Layer: Return consolidated news payload and matching PMBOK mapping insights
     return {
         'statusCode': 200,
         'body': json.dumps({
