@@ -7,7 +7,7 @@ import boto3
 def lambda_handler(event, context):
     """
     Phase 2: Ingests tech RSS news feeds, loads the securely isolated JSON prompt matrix,
-    and invokes Amazon Bedrock (Claude 3 Haiku) to generate PMBOK 8th Edition strategic insights.
+    and invokes Amazon Bedrock (Claude Haiku 4.5) to generate PMBOK 8th Edition strategic insights.
     """
     # 1. Secure Prompt Isolation: Load the externalized PMBOK 8th rules asset
     rules_path = os.path.join(os.path.dirname(__file__), 'prompts', 'pmbok_8th_rules.json')
@@ -45,7 +45,7 @@ def lambda_handler(event, context):
     # 3. AI Orchestration Layer: Construct prompt payload and invoke Amazon Bedrock
     # On-Demand Cost Optimization: Using Claude Haiku 4.5 for cost-effective semantic processing
     bedrock = boto3.client(service_name='bedrock-runtime', region_name='us-east-1')
-    model_id = "anthropic.claude-4-5-haiku-20260307-v1:0" 
+    model_id = "us.anthropic.claude-haiku-4-5-20251001-v1:0" 
 
     # Inject external prompt matrix and dynamic target news safely into instructions
     prompt_content = f"""
