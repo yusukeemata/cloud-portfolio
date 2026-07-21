@@ -20,23 +20,27 @@ https://yusuke-cloud.org/admin.html
 Contact form  
 https://yusuke-cloud.org/contact.html
 
+AI Insights Pipeline demonstration      
+https://yusuke-cloud.org/ai-projects/project-6-ai-insights/frontend/indexAI.html
+
 ---
 
-This repository contains hands-on AWS projects implementing real serverless architecture patterns on AWS.
+This repository contains hands-on AWS projects implementing real-world serverless architectures, generative AI integration, and automated cloud workflows.
 
-The goal of this portfolio is to demonstrate practical cloud architecture including:
+The goal of this portfolio is to demonstrate practical cloud architecture and engineering practices, including:
 
 * Serverless application design
 * Secure authentication
 * REST API architecture
 * NoSQL data storage
 * Monitoring and observability
+* Generative AI & LLM Orchestration
 
-These projects showcase end-to-end AWS system design using modern serverless services.
+These projects showcase end-to-end AWS system design, combining modern cloud-native services with practical AI solutions.
 
 ---
 
-## Architecture Diagram
+## Architecture Diagram (Projects #1 - #5)
 
 ![Architecture](architecture/architecture-diagram-clean.svg)
 
@@ -370,7 +374,7 @@ Services used:
 * Amazon Bedrock (Claude Haiku 4.5)
 * AWS Lambda (Python)
 * Amazon DynamoDB
-* Amazon Translate
+* Amazon Translate (English - Japanese)
 
 Key concepts demonstrated:
 
@@ -382,16 +386,20 @@ Key concepts demonstrated:
 Architecture:
 
 ```
-     Tech RSS Feed
-          │
-          ▼
-      AWS Lambda  ◄─── Read JSON Prompt Matrix (prompts/pmbok_8th_rules.json)
-          │
-          ▼
-     Amazon Bedrock
-          │
-          ▼
-     DynamoDB Storage
+[ RSS Feed (AWS What's New) ]
+             │
+             ▼
+      [ AWS Lambda ] ──────► [ Amazon Bedrock (Claude) ]
+             │                       │ (PMBOK Analysis)
+             ├───────────────────────┘
+             ▼
+    [ Amazon Translate ] ───► (Japanese Payload)
+             │
+             ▼
+    [ Amazon DynamoDB ] ◄──── [ Amazon API Gateway (HTTP API) ]
+                                      ▲
+                                      │ (Fetch)
+                            [ Static Frontend / S3 ]
 
 ```
 
@@ -427,16 +435,16 @@ Languages / Tools
 
 ## Key Concepts Demonstrated
 
-This portfolio highlights several important AWS architecture concepts:
+This portfolio highlights several core enterprise & cloud architecture patterns on AWS:
 
-* Serverless architecture design
-* Secure authentication with Cognito
-* JWT authorization with API Gateway
-* REST API design
-* NoSQL database integration
-* Cloud monitoring and observability
-* Secure API access patterns
-* End-to-end AWS system integration
+* **Generative AI & LLM Integration:** Automated prompt engineering and multi-model orchestration via Amazon Bedrock (Anthropic Claude).
+* **Automated Data Pipeline:** Event-driven/scheduled RSS ingestion, dynamic translation (Amazon Translate), and asynchronous payload processing.
+* **IT Governance & Domain Mapping:** Bridging cloud infrastructure updates with project management frameworks (PMI PMBOK® Guide 8th Edition).
+* **Serverless Architecture Design:** Highly scalable, event-driven, and cost-effective system design using AWS Lambda, API Gateway, and S3.
+* **Identity & Access Management:** Secure user authentication using Amazon Cognito and fine-grained JWT authorizers.
+* **API Architecture & Optimization:** Clean REST & HTTP API design featuring client-side state caching and payload sanitization.
+* **NoSQL Database Modeling:** Efficient persistence, schema design, and querying with Amazon DynamoDB.
+* **Cloud Observability & Monitoring:** Centralized logging, custom metrics, SNS alert integrations, and CloudWatch dashboards.
 
 ---
 
@@ -444,7 +452,7 @@ This portfolio highlights several important AWS architecture concepts:
 
 Yusuke Emata
 
-AWS Certified Solutions Architect – Associate, 
+AWS Certified Solutions Architect – Associate, Machine Learning Engineer - Associate, 
 PMP / PMI-ACP Certified Project Manager
 
 Focused on designing and implementing serverless architectures on AWS, combining cloud engineering with strong project management experience.
