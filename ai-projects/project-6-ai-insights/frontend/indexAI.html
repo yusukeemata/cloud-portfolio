@@ -202,8 +202,13 @@
       </p>
     </section>
 
-    <div class="dashboard-controls">
+    <div class="dashboard-controls" style="display: flex; gap: 12px; align-items: center;">
       <button id="fetch-btn" class="btn btn-primary">Fetch Latest AI Insights</button>
+      
+      <!-- 【追加】初期状態は非表示（display: none）の翻訳ボタン -->
+      <button id="translate-btn" class="btn" style="display: none; background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd;">
+        日本語にする（Amazon Translate）
+      </button>
     </div>
 
     <!-- AIの分析結果がここに動的に生成されます -->
