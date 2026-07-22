@@ -367,21 +367,22 @@ This demonstrates that the monitoring system is fully functional and capable of 
 
 ## Project #6 — AI-Driven PM Insights Pipeline
 
-An automated data pipeline that ingests external technology trends and maps them into technical project management insights using Generative AI.
+An automated, asynchronous data pipeline that ingests external cloud technology trends and transforms them into actionable project governance insights using Generative AI.
 
 Services used:
 
 * Amazon Bedrock (Claude Haiku 4.5)
 * AWS Lambda (Python)
 * Amazon DynamoDB
-* Amazon Translate (English - Japanese)
+* Amazon API Gateway (HTTP API)
+* Amazon Translate (English ↔ Japanese)
 
 Key concepts demonstrated:
 
-* Secure Prompt Isolation (Externalized instruction assets)
-* On-Demand Cost Optimization (Serverless GenAI execution)
-* Dynamic context orchestration
-* Multi-language data tag modeling
+* Asynchronous pipeline orchestration vs. synchronous API latency
+* Prompt Engineering & PMBOK® 8th Edition Domain Mapping
+* Dual-payload generation & Zero-latency client-side language switching
+* Payload sanitization & UI layout resilience
 
 Architecture:
 
